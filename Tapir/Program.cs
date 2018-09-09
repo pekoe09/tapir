@@ -23,6 +23,8 @@ namespace Tapir
                 {
                     var context = services.GetRequiredService<TapirContext>();
                     context.Database.EnsureCreated();
+                    Console.WriteLine(context.Database.ProviderName);
+                    DbInitializer.Initialize(context);
                 }
                 catch (Exception ex)
                 {
