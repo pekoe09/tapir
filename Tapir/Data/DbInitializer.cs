@@ -7,7 +7,7 @@ namespace Tapir.Models
     {
         public static void Initialize(TapirContext context)
         {
-            if (context.Company.Any())
+            if (context.Companies.Any())
             {
                 return;
             }
@@ -20,7 +20,7 @@ namespace Tapir.Models
             };
             foreach (Company c in companies)
             {
-                context.Company.Add(c);
+                context.Companies.Add(c);
             }
             context.SaveChanges();
 
@@ -32,7 +32,7 @@ namespace Tapir.Models
             };
             foreach (Person p in persons)
             {
-                context.Person.Add(p);
+                context.Persons.Add(p);
             }
             context.SaveChanges();
 
@@ -40,24 +40,24 @@ namespace Tapir.Models
             {
                 new Employment{
                     PersonID = persons.Single(p => p.LastName == "Avanne").ID,
-                    CompanyID = companies.Single(c => c.ShortName == "Oy1").ID
+                    CompanyID = (int)companies.Single(c => c.ShortName == "Oy1").ID
                 },
                 new Employment{
                     PersonID = persons.Single(p => p.LastName == "Bergström").ID,
-                    CompanyID = companies.Single(c => c.ShortName == "Oy1").ID
+                    CompanyID = (int)companies.Single(c => c.ShortName == "Oy1").ID
                 },
                 new Employment{
                     PersonID = persons.Single(p => p.LastName == "Bergström").ID,
-                    CompanyID = companies.Single(c => c.ShortName == "Oy2").ID
+                    CompanyID = (int)companies.Single(c => c.ShortName == "Oy2").ID
                 },
                 new Employment{
                     PersonID = persons.Single(p => p.LastName == "Cronqvist").ID,
-                    CompanyID = companies.Single(c => c.ShortName == "Oy2").ID
+                    CompanyID = (int)companies.Single(c => c.ShortName == "Oy2").ID
                 },
             };
             foreach (Employment e in employments)
             {
-                context.Employment.Add(e);
+                context.Employments.Add(e);
             }
             context.SaveChanges();
         }
