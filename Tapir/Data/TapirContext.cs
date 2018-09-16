@@ -8,8 +8,8 @@ namespace Tapir.Models
             : base(options)
         { }
 
-        public DbSet<Person> Person { get; set; }
-        public DbSet<Company> Company { get; set; }
-        public DbSet<Employment> Employment { get; set; }
+        public DbSet<Person> Persons { get; set; }
+        public DbSet<Company> Companies { get; set; }
+        public DbSet<Employment> Employments { get; set; }
     }
 }
