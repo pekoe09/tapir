@@ -34,7 +34,7 @@ namespace Tapir.Models
         public Company Update(Company company)
         {
             Company updatedCompany = GetById((int)company.ID);
-            if(updatedCompany != null)
+            if(updatedCompany == null)
             {
                 return null;
             }

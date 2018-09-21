@@ -20,31 +20,63 @@ namespace Tapir.Controllers
         }
 
         [HttpGet]
-        public IActionResult Get()
+        [ProducesResponseType(200)]
+        public ActionResult<List<CompanyDto>> GetAll()
         {
             List<CompanyDto> companies = companyService.GetCompanies();
-            return null;
+            return companies;
+        }
+
+        [HttpGet("{id}", Name = "GetCompany")]
+        [ProducesResponseType(200)]
+        [ProducesResponseType(404)]
+        public ActionResult<CompanyDto> GetById(int id)
+        {
+            CompanyDto company = companyService.GetCompany(id);
+            if (company == null)
+            {
+                return NotFound();
+            }
+            return company;
         }
 
         [HttpPost]
-        public IActionResult Post([FromBody] CompanyDto company)
+        [ProducesResponseType(200)]
+        [ProducesResponseType(400)]
+        public ActionResult<CompanyDto> Create(CompanyDto company)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
             CompanyDto newCompany = companyService.SaveCompany(company);
-            return null;
+            return CreatedAtRoute("GetCompany", new { id = newCompany.ID }, newCompany);
         }
 
         [HttpPut("{id}")]
-        public IActionResult Put(int id, [FromBody] CompanyDto company)
+        [ProducesResponseType(204)]
+        [ProducesResponseType(400)]
+        public ActionResult Update(int id, CompanyDto company)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
             CompanyDto updatedCompany = companyService.SaveCompany(company);
-            return null;
+            return NoContent();
         }
 
         [HttpDelete("{id}")]
+        [ProducesResponseType(204)]
+        [ProducesResponseType(404)]
         public IActionResult Delete(int id)
         {
             CompanyDto deletedCompany = companyService.RemoveCompany(id);
-            return null;
+            if (deletedCompany == null)
+            {
+                return NotFound();
+            }
+            return NoContent();
         }
     }
 }
