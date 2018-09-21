@@ -104,7 +104,7 @@ namespace Tapir.UnitTests.Services
             };
 
             Assert.Throws<ArgumentException>(() => service.SaveCompany(dto));
-            mockRepository.Verify(x => x.Insert(It.IsAny<Company>()), Times.Never);            
+            mockRepository.Verify(x => x.Insert(It.IsAny<Company>()), Times.Never);
         }
 
         [Theory]
@@ -148,6 +148,78 @@ namespace Tapir.UnitTests.Services
             Assert.Equal(dto.FullName, result.FullName);
             Assert.Equal(dto.ShortName, result.ShortName);
             Assert.Equal(dto.ID, result.ID);
+        }
+
+        [Theory]
+        [InlineData(null)]
+        [InlineData("")]
+        [InlineData(" ")]
+        public void UpdatingWithoutFullNameThrowsException(string fullName)
+        {
+            var mockRepository = new Mock<ICompaniesRepository>();
+            CompanyService service = new CompanyService(mockRepository.Object);
+
+            CompanyDto dto = new CompanyDto()
+            {
+                ID = 2,
+                FullName = fullName,
+                ShortName = "Cny2"
+            };
+
+            Assert.Throws<ArgumentException>(() => service.SaveCompany(dto));
+            mockRepository.Verify(x => x.Insert(It.IsAny<Company>()), Times.Never);
+            mockRepository.Verify(x => x.Update(It.IsAny<Company>()), Times.Never);
+        }
+
+        [Theory]
+        [InlineData(null)]
+        [InlineData("")]
+        [InlineData(" ")]
+        public void UpdatingWithoutShortNameThrowsException(string shortName)
+        {
+            var mockRepository = new Mock<ICompaniesRepository>();
+            CompanyService service = new CompanyService(mockRepository.Object);
+
+            CompanyDto dto = new CompanyDto()
+            {
+                FullName = "Company 4",
+                ShortName = shortName
+            };
+
+            Assert.Throws<ArgumentException>(() => service.SaveCompany(dto));
+            mockRepository.Verify(x => x.Update(It.IsAny<Company>()), Times.Never);
+            mockRepository.Verify(x => x.Insert(It.IsAny<Company>()), Times.Never);
+        }
+
+        [Fact]
+        public void DeletesCompany()
+        {
+            var mockRepository = new Mock<ICompaniesRepository>();
+            mockRepository.Setup(x => x.GetById(2)).Returns(companies[1]);
+            mockRepository.Setup(x => x.Remove(2)).Returns(companies[1]);
+            CompanyService service = new CompanyService(mockRepository.Object);
+
+            var result = service.RemoveCompany(2);
+
+            mockRepository.Verify(x => x.Remove(2), Times.Once);
+            Assert.IsType<CompanyDto>(result);
+            Assert.Equal(companies[1].FullName, result.FullName);
+            Assert.Equal(companies[1].ShortName, result.ShortName);
+            Assert.Equal(companies[1].ID, result.ID);
+        }
+
+        [Fact]
+        public void ReturnsNullWhenDeletingNonexistingCompany()
+        {
+            var mockRepository = new Mock<ICompaniesRepository>();
+            mockRepository.Setup(x => x.GetById(4)).Returns<Company>(null);
+            mockRepository.Setup(x => x.Remove(4)).Returns<Company>(null);
+            CompanyService service = new CompanyService(mockRepository.Object);
+
+            var result = service.RemoveCompany(2);
+
+            mockRepository.Verify(x => x.Remove(2), Times.Never);
+            Assert.Null(result);
         }
     }
 }
