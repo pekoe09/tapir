@@ -28,7 +28,7 @@ namespace Tapir.Tests.UnitTests.Controllers
 
             mockService.Verify(x => x.GetCompanies(), Times.Once);
             Assert.IsType<List<CompanyDto>>(result.Value);
-            List<CompanyDto> resultList = (List<CompanyDto>)result.Value;
+            List<CompanyDto> resultList = result.Value;
             Assert.Equal(companies.Count, resultList.Count);
             foreach (CompanyDto c in resultList)
             {
@@ -47,8 +47,7 @@ namespace Tapir.Tests.UnitTests.Controllers
 
             mockService.Verify(x => x.GetCompany(2), Times.Once);
             Assert.IsType<CompanyDto>(result.Value);
-            CompanyDto resultCo = (CompanyDto)result.Value;
-            Assert.Equal(2, resultCo.ID);
+            Assert.Equal(2, result.Value.ID);
         }
 
         [Fact]
@@ -61,6 +60,105 @@ namespace Tapir.Tests.UnitTests.Controllers
             var result = controller.GetById(4);
 
             mockService.Verify(x => x.GetCompany(4), Times.Once);
+            Assert.IsType<NotFoundResult>(result.Result);
+        }
+
+        [Fact]
+        public void CreatesCompany()
+        {
+            var mockService = new Mock<ICompanyService>();
+            mockService.Setup(s => s.SaveCompany(It.IsAny<CompanyDto>())).Returns((CompanyDto c) => c);
+            var controller = new CompaniesController(mockService.Object);            
+
+            CompanyDto testCo = new CompanyDto() { FullName = "TestComp4", ShortName = "Test4" };
+            var result = controller.Create(testCo);
+
+            mockService.Verify(x => x.SaveCompany(It.IsAny<CompanyDto>()), Times.Once);
+            Assert.IsType<CreatedAtRouteResult>(result.Result);
+            CreatedAtRouteResult bottomResult = (CreatedAtRouteResult)result.Result;
+            Assert.IsType<CompanyDto>(bottomResult.Value);
+            Assert.Equal(testCo.FullName, ((CompanyDto)bottomResult.Value).FullName);
+        }
+
+        [Fact]
+        public void CreatingInvalidCompanyReturnsBadRequest()
+        {
+            var mockService = new Mock<ICompanyService>();
+            var controller = new CompaniesController(mockService.Object);
+            controller.ModelState.AddModelError("FullName", "Fullname not set");
+
+            CompanyDto testCo = new CompanyDto() { FullName = "TestComp4", ShortName = "Test4" };
+            var result = controller.Create(testCo);
+
+            mockService.Verify(x => x.SaveCompany(It.IsAny<CompanyDto>()), Times.Never);
+            Assert.IsType<BadRequestObjectResult>(result.Result);
+        }
+
+        [Fact]
+        public void UpdatesCompany()
+        {
+            var mockService = new Mock<ICompanyService>();
+            mockService.Setup(s => s.SaveCompany(It.IsAny<CompanyDto>())).Returns((CompanyDto c) => c);
+            var controller = new CompaniesController(mockService.Object);
+
+            CompanyDto testCo = new CompanyDto() { ID = 2, FullName = "TestComp4", ShortName = "Test4" };
+            var result = controller.Update(2, testCo);
+
+            mockService.Verify(x => x.SaveCompany(It.IsAny<CompanyDto>()), Times.Once);
+            Assert.IsType<NoContentResult>(result.Result);
+        }
+
+        [Fact]
+        public void UpdatingInvalidCompanyReturnsBadRequest()
+        {
+            var mockService = new Mock<ICompanyService>();
+            var controller = new CompaniesController(mockService.Object);
+            controller.ModelState.AddModelError("FullName", "Fullname not set");
+
+            CompanyDto testCo = new CompanyDto() { ID = 2, FullName = "TestComp4", ShortName = "Test4" };
+            var result = controller.Create(testCo);
+
+            mockService.Verify(x => x.SaveCompany(It.IsAny<CompanyDto>()), Times.Never);
+            Assert.IsType<BadRequestObjectResult>(result.Result);
+        }
+
+        [Fact]
+        public void UpdatedCompanyWithInvalidIDReturnsNotFound()
+        {
+            var mockService = new Mock<ICompanyService>();
+            mockService.Setup(s => s.SaveCompany(It.IsAny<CompanyDto>())).Returns((CompanyDto)null);
+            var controller = new CompaniesController(mockService.Object);
+
+            CompanyDto testCo = new CompanyDto() { ID = 4, FullName = "TestComp4", ShortName = "Test4" };
+            var result = controller.Update(4, testCo);
+
+            mockService.Verify(x => x.SaveCompany(It.IsAny<CompanyDto>()), Times.Once);
+            Assert.IsType<NotFoundResult>(result.Result);
+        }
+
+        [Fact]
+        public void DeletesCompany()
+        {
+            var mockService = new Mock<ICompanyService>();
+            mockService.Setup(s => s.RemoveCompany(2)).Returns(companies[1]);
+            var controller = new CompaniesController(mockService.Object);
+
+            var result = controller.Delete(2);
+
+            mockService.Verify(x => x.RemoveCompany(2), Times.Once);
+            Assert.IsType<NoContentResult>(result.Result);
+        }
+
+        [Fact]
+        public void DeletingNonexistingCompanyRetursNotFound()
+        {
+            var mockService = new Mock<ICompanyService>();
+            mockService.Setup(s => s.RemoveCompany(4)).Returns((CompanyDto)null);
+            var controller = new CompaniesController(mockService.Object);
+
+            var result = controller.Delete(4);
+
+            mockService.Verify(x => x.RemoveCompany(4), Times.Once);
             Assert.IsType<NotFoundResult>(result.Result);
         }
     }

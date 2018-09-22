@@ -192,6 +192,25 @@ namespace Tapir.UnitTests.Services
         }
 
         [Fact]
+        public void UpdatingNonexistingCompanyReturnsNull()
+        {
+            var mockRepository = new Mock<ICompaniesRepository>();
+            mockRepository.Setup(x => x.Update(It.IsAny<Company>())).Returns((Company)null);
+            CompanyService service = new CompanyService(mockRepository.Object);
+            CompanyDto dto = new CompanyDto()
+            {
+                ID = 4,
+                FullName = "Company 4",
+                ShortName = "Cny4"
+            };
+
+            var result = service.SaveCompany(dto);
+
+            mockRepository.Verify(x => x.Update(It.IsAny<Company>()), Times.Once);
+            Assert.Null(result);
+        }
+
+        [Fact]
         public void DeletesCompany()
         {
             var mockRepository = new Mock<ICompaniesRepository>();

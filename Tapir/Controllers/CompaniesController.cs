@@ -50,26 +50,31 @@ namespace Tapir.Controllers
                 return BadRequest(ModelState);
             }
             CompanyDto newCompany = companyService.SaveCompany(company);
-            return CreatedAtRoute("GetCompany", new { id = newCompany.ID }, newCompany);
+            return CreatedAtRoute(routeName: "GetCompany", routeValues: new { id = newCompany.ID }, value: newCompany);
         }
 
         [HttpPut("{id}")]
         [ProducesResponseType(204)]
         [ProducesResponseType(400)]
-        public ActionResult Update(int id, CompanyDto company)
+        [ProducesResponseType(404)]
+        public ActionResult<CompanyDto> Update(int id, CompanyDto company)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
             CompanyDto updatedCompany = companyService.SaveCompany(company);
+            if(updatedCompany == null)
+            {
+                return NotFound();
+            }
             return NoContent();
         }
 
         [HttpDelete("{id}")]
         [ProducesResponseType(204)]
         [ProducesResponseType(404)]
-        public IActionResult Delete(int id)
+        public ActionResult<CompanyDto> Delete(int id)
         {
             CompanyDto deletedCompany = companyService.RemoveCompany(id);
             if (deletedCompany == null)
