@@ -47,18 +47,24 @@
     <Folder Include="src\" />
     <Folder Include="public\" />
     <Folder Include="node-modules\" />
+    <Folder Include="src\actions\" />
+    <Folder Include="src\components\" />
+    <Folder Include="src\components\companies\" />
+    <Folder Include="src\components\ui-structure\" />
+    <Folder Include="src\services\" />
+    <Folder Include="src\reducers\" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="src\App.js">
+    <Compile Include="src\components\ui-structure\TapirLayout.js">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="src\Main.js">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="src\App.test.js">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="src\index.js">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="src\registerServiceWorker.js">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="src\store.js">
