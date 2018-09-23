@@ -12,6 +12,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Tapir.Models;
+using Tapir.Services;
+using Tapir.Core;
 
 namespace Tapir
 {
@@ -32,6 +34,7 @@ namespace Tapir
                 options.UseSqlServer(Configuration.GetConnectionString("TapirContext")));
 
             services.AddScoped<ICompaniesRepository, CompaniesRepository>();
+            services.AddScoped<ICompanyService, CompanyService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
