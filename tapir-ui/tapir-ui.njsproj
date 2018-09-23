@@ -50,12 +50,32 @@
     <Folder Include="src\actions\" />
     <Folder Include="src\components\" />
     <Folder Include="src\components\companies\" />
+    <Folder Include="src\components\employments\" />
+    <Folder Include="src\components\persons\" />
     <Folder Include="src\components\ui-structure\" />
     <Folder Include="src\services\" />
     <Folder Include="src\reducers\" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="src\actions\companyActions.js">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="src\components\companies\CompaniesList.js">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="src\components\employments\EmploymentsList.js">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="src\components\persons\PersonsList.js">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="src\components\ui-structure\TapirHeader.js">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="src\components\ui-structure\TapirLayout.js">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="src\components\ui-structure\TapirSidebar.js">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="src\Main.js">
@@ -65,6 +85,12 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="src\index.js">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="src\reducers\companyReducer.js">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="src\services\companyService.js">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="src\store.js">

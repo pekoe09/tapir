@@ -5,6 +5,7 @@ import { BrowserRouter as Router } from 'react-router-dom'
 import { Provider } from 'react-redux'
 import { PersistGate } from 'redux-persist/integration/react'
 import { store, persistor } from './store'
+import 'grommet/grommet.min.css'
 
 const render = () => {
     ReactDOM.render(
