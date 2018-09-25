@@ -1,6 +1,7 @@
 ﻿import React from 'react'
 import { connect } from 'react-redux'
 import { getAllCompanies } from '../../actions/companyActions'
+import ReactTable from 'react-table'
 import TapirHeader from '../ui-structure/TapirHeader'
 
 class CompaniesList extends React.Component {
@@ -8,6 +9,17 @@ class CompaniesList extends React.Component {
   componentDidMount = async () => {
     await this.props.getAllCompanies()
   }
+
+  columns = [
+    {
+      Header: 'Name',
+      accessor: 'fullName'
+    },
+    {
+      Header: 'Short name',
+      accessor: 'shortName'
+    }
+  ]
 
   render() {
     return (
@@ -17,6 +29,12 @@ class CompaniesList extends React.Component {
         >
           <button style={{ float: 'right' }}>Add company</button>
         </TapirHeader>
+        <ReactTable
+          data={this.props.companies}
+          columns={this.columns}
+          defaultPageSize={50}
+          minRows={1}
+        />
       </div>
     )
   }
