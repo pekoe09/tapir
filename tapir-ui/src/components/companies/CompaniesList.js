@@ -1,6 +1,7 @@
 ﻿import React from 'react'
 import { connect } from 'react-redux'
 import { getAllCompanies } from '../../actions/companyActions'
+import TapirHeader from '../ui-structure/TapirHeader'
 
 class CompaniesList extends React.Component {
 
@@ -11,7 +12,11 @@ class CompaniesList extends React.Component {
   render() {
     return (
       <div>
-        <h2>Companies</h2>
+        <TapirHeader
+          title='Companies'
+        >
+          <button style={{ float: 'right' }}>Add company</button>
+        </TapirHeader>
       </div>
     )
   }

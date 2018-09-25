@@ -1,6 +1,5 @@
 ﻿import React from 'react'
 import styled from 'styled-components'
-import SvgIcon from 'react-icons-kit'
 import TapirSidebarNav from './TapirSidebarNav'
 
 const StyledSidebar = styled.div`
