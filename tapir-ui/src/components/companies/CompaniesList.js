@@ -10,7 +10,9 @@ class CompaniesList extends React.Component {
 
   render() {
     return (
-      <h1>Companies</h1>
+      <div>
+        <h2>Companies</h2>
+      </div>
     )
   }
 }

@@ -1,18 +1,17 @@
 ﻿import React from 'react'
 import ReactDOM from 'react-dom'
-import Main from './Main'
+import App from './App'
 import { BrowserRouter as Router } from 'react-router-dom'
 import { Provider } from 'react-redux'
 import { PersistGate } from 'redux-persist/integration/react'
 import { store, persistor } from './store'
-import 'grommet/grommet.min.css'
 
 const render = () => {
     ReactDOM.render(
         <Provider store={store}>
             <PersistGate loading={null} persistor={persistor}>
                 <Router>
-                    <Main />
+                    <App />
                 </Router>
             </PersistGate>
         </Provider>,

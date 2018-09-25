@@ -1,23 +1,15 @@
 ﻿import React from 'react'
-import Split from 'grommet/components/Split'
-import Animate from 'grommet/components/Animate'
 import TapirSidebar from './TapirSidebar'
-import Article from 'grommet/components/Article'
 
 const TapirLayout = (props) => {
   return (
-    <Split>
-      <Animate
-        enter={{ "animation": "slide-right", "duration": 500 }}
-        leave={{ "animation": "slide-left", "duration": 500 }}
-        visible={true}
-      >
-        <TapirSidebar />
-      </Animate>
-      <Article>
+    <div style={{ display: 'flex', height: '100vh' }}>
+      <TapirSidebar />
+      <div id='main'>
+        <h1>Tapir layout</h1>
         {props.children}
-      </Article>
-    </Split>
+      </div>
+    </div>
   )
 }
     

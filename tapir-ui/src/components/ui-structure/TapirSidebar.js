@@ -1,34 +1,40 @@
 ﻿import React from 'react'
-import { Link } from 'react-router-dom'
-import Sidebar from 'grommet/components/Sidebar'
-import Header from 'grommet/components/Header'
-import Title from 'grommet/components/Title'
-import Menu from 'grommet/components/Menu'
-import Anchor from 'grommet/components/Anchor'
-import Box from 'grommet/components/Box'
+import styled from 'styled-components'
+import SvgIcon from 'react-icons-kit'
+import TapirSidebarNav from './TapirSidebarNav'
+
+const StyledSidebar = styled.div`
+  height: 100%;
+  position: 'fixed';
+  z-index: 1;
+  top: 0;
+  left: 0;
+  overflow-x: 'hidden';
+  transition: 0.5s;
+  font-family: 'Open Sans';
+  background: blueviolet;
+  color: white;
+`
 
 const TapirSidebar = () => {
   return (
-    <Sidebar colorIndex='neutral-1'>
-      <Header pad='medium'>
-        <Title>
-          Tapiiri
-        </Title>
-      </Header>
-      <Box flex='grow' justify='start'>
-        <Menu primary={true}>
-          <Link to='/companies' className='grommetux-anchor'>
-            Companies
-          </Link>
-          <Link to='/persons' className='grommetux-anchor'>
-            Persons
-          </Link>
-          <Link to='/employments' className='grommetux-anchor'>
-            Employments
-          </Link>
-        </Menu>
-      </Box>
-    </Sidebar>
+    <StyledSidebar>
+      <h3 style={{ fontweight: 800 }}>
+        Tapiiri
+      </h3>
+      <TapirSidebarNav
+        text='Companies'
+        linkTo='/companies'
+      />
+      <TapirSidebarNav
+        text='Persons'
+        linkTo='/persons'
+      />
+      <TapirSidebarNav
+        text='Employments'
+        linkTo='/employments'
+      />
+    </StyledSidebar>
   )
 }
 
