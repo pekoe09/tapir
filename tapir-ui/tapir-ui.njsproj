@@ -75,7 +75,16 @@
     <Compile Include="src\components\ui-structure\TapirLayout.js">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="src\components\ui-structure\TapirNavbar.js">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="src\components\ui-structure\TapirSidebar.js">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="src\components\ui-structure\TapirSidebarNav.js">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="src\components\ui-structure\TapirView.js">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="src\Main.js">
