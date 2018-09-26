@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using Tapir.Core;
 
 namespace Tapir.Models
 {
-    public class Person
+    public class Person : EntityBase
     {
-        public int ID { get; set; }
         [Required]
         [StringLength(50, ErrorMessage = "Last name cannot be longer than 50 characters")]
         public string LastName { get; set; }
@@ -23,5 +23,27 @@ namespace Tapir.Models
             }
         }
         public ICollection<Employment> Employments { get; set; }
+
+        internal PersonDTO getDTO()
+        {
+            return new PersonDTO
+            {
+                ID = this.ID,
+                LastName = this.LastName,
+                FirstNames = this.FirstNames,
+                DOB = this.DOB
+            };
+        }
+
+        internal static Person Hydrate(PersonDTO dto)
+        {
+            return new Person()
+            {
+                ID = dto.ID,
+                LastName = dto.LastName,
+                FirstNames = dto.FirstNames,
+                DOB = dto.DOB
+            };
+        }
     }
 }

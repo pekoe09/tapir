@@ -35,6 +35,8 @@ namespace Tapir
 
             services.AddScoped<ICompaniesRepository, CompaniesRepository>();
             services.AddScoped<ICompanyService, CompanyService>();
+            services.AddScoped<IPersonsRepository, PersonsRepository>();
+            services.AddScoped<IPersonService, PersonService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
