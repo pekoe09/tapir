@@ -39,19 +39,19 @@ namespace Tapir.Models
             var employments = new Employment[]
             {
                 new Employment{
-                    PersonID = persons.Single(p => p.LastName == "Avanne").ID,
+                    PersonID = (int)persons.Single(p => p.LastName == "Avanne").ID,
                     CompanyID = (int)companies.Single(c => c.ShortName == "Oy1").ID
                 },
                 new Employment{
-                    PersonID = persons.Single(p => p.LastName == "Bergström").ID,
+                    PersonID = (int)persons.Single(p => p.LastName == "Bergström").ID,
                     CompanyID = (int)companies.Single(c => c.ShortName == "Oy1").ID
                 },
                 new Employment{
-                    PersonID = persons.Single(p => p.LastName == "Bergström").ID,
+                    PersonID = (int)persons.Single(p => p.LastName == "Bergström").ID,
                     CompanyID = (int)companies.Single(c => c.ShortName == "Oy2").ID
                 },
                 new Employment{
-                    PersonID = persons.Single(p => p.LastName == "Cronqvist").ID,
+                    PersonID = (int)persons.Single(p => p.LastName == "Cronqvist").ID,
                     CompanyID = (int)companies.Single(c => c.ShortName == "Oy2").ID
                 },
             };
