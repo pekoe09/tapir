@@ -60,6 +60,9 @@
     <Compile Include="src\actions\companyActions.js">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="src\components\companies\AddCompany.js">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="src\components\companies\CompaniesList.js">
       <SubType>Code</SubType>
     </Compile>
@@ -67,6 +70,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="src\components\persons\PersonsList.js">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="src\components\ui-structure\StyledComponents.js">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="src\components\ui-structure\TapirHeader.js">

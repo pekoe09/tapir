@@ -7,6 +7,12 @@ const getAll = async () => {
   return response.data
 }
 
+const addCompany = async company => {
+  const response = await axios.post(baseUrl, company)
+  return response.data
+}
+
 export default {
-  getAll
+  getAll,
+  addCompany
 }

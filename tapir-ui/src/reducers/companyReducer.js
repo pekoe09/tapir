@@ -1,12 +1,16 @@
 ﻿import {
   COMPANIES_GETALL_BEGIN,
   COMPANIES_GETALL_SUCCESS,
-  COMPANIES_GETALL_FAILURE
+  COMPANIES_GETALL_FAILURE,
+  COMPANY_CREATE_BEGIN,
+  COMPANY_CREATE_SUCCESS,
+  COMPANY_CREATE_FAILURE
 } from '../actions/companyActions'
 
 const initialState = {
   items: [],
   loading: false,
+  creating: false,
   error: null
 }
 
@@ -29,6 +33,25 @@ const companyReducer = (store = initialState, action) => {
       return {
         ...store,
         loading: false,
+        error: action.payload.error
+      }
+    case COMPANY_CREATE_BEGIN:
+      return {
+        ...store,
+        creating: true,
+        error: null
+      }
+    case COMPANY_CREATE_SUCCESS:
+      return {
+        ...store,
+        items: store.items.concat(action.payload.company),
+        creating: false,
+        error: null
+      }
+    case COMPANY_CREATE_FAILURE:
+      return {
+        ...store,
+        creating: false,
         error: action.payload.error
       }
     default:

@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { getAllCompanies } from '../../actions/companyActions'
 import ReactTable from 'react-table'
 import TapirHeader from '../ui-structure/TapirHeader'
+import { StyledReactTable, StyledLinkButton } from '../ui-structure/StyledComponents'
 
 class CompaniesList extends React.Component {
 
@@ -27,9 +28,14 @@ class CompaniesList extends React.Component {
         <TapirHeader
           title='Companies'
         >
-          <button style={{ float: 'right' }}>Add company</button>
+          <StyledLinkButton
+            style={{ float: 'right' }}
+            to={'/companies/add'}
+            text={'Add company'}
+            type={'primary'}
+          />
         </TapirHeader>
-        <ReactTable
+        <StyledReactTable
           data={this.props.companies}
           columns={this.columns}
           defaultPageSize={50}
