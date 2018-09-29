@@ -1,11 +1,15 @@
 ﻿import React from 'react'
 import styled, { css } from 'styled-components'
 import ReactTable from 'react-table'
-import { Button } from 'react-bootstrap'
+import { Button, Modal } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 
 const StyledReactTable = styled(ReactTable)`
   margin: 10px;
+`
+
+const StyledModal = styled(Modal)`
+  
 `
 
 const StyledLink = styled(Link)`
@@ -49,6 +53,30 @@ const StyledButton = styled(Button)`
   //      color: white;
   //    }
   //  `}
+
+  ${props => props.btntype === 'rowdanger' && css`
+    background: white;
+    color: indianred;
+    border-style: solid;
+    border-color: indianred;
+    border-width: 1.5px;
+    font-size: 0.8em;
+    font-weight: 700;
+    
+    &:hover, &:focus {
+      background: white;
+      color: indianred;
+      border-color: indianred;
+      outline: none;
+    }
+
+    &:active:focus {
+      background: pink;
+      color: indianred;
+      border-color: indianred;
+      outline: none;
+    }
+  `}
 `
 
 const StyledLinkButton = ({ text, to, btntype }) => {
@@ -63,5 +91,6 @@ export {
   StyledReactTable,
   StyledButton,
   StyledLink,
-  StyledLinkButton
+  StyledLinkButton,
+  StyledModal
 }

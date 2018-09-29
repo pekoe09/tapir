@@ -29,12 +29,10 @@ class AddCompany extends React.Component {
     }
     await this.props.addCompany(company)
     if (!this.props.error) {
-      console.log('Adding success')
       this.props.addUIMessage('Added company ' + company.fullName, 'success', 10)
       this.setState({ fullName: "", shortName: "" })
       this.props.history.push('/companies')
     } else {
-      console.log('Adding failure')
       this.props.addUIMessage('Could not add the company', 'danger', 10)
     }
   }

@@ -7,7 +7,8 @@ const getAll = async () => {
   return response.data
 }
 
-const addCompany = async company => {
+const addCompany = async (company) => {
+  console.log('Posting company ', company)
   const response = await axios.post(baseUrl, company)
   return response.data
 }

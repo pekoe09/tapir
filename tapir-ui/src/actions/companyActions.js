@@ -48,11 +48,11 @@ export const getAllCompanies = () => {
   }
 }
 
-export const addCompany = company => {
+export const addCompany = (company) => {
   return async (dispatch) => {
     dispatch(addCompanyBegin())
     try {
-      const company = await companiesService.addCompany()
+      company = await companiesService.addCompany(company)
       dispatch(addCompanySuccess(company))
     } catch (error) {
       console.log(error)
