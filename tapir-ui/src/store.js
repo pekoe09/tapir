@@ -5,9 +5,11 @@ import storage from 'redux-persist/lib/storage'
 import autoMergeLevel2 from 'redux-persist/lib/stateReconciler/autoMergeLevel2'
 
 import companyReducer from './reducers/companyReducer'
+import uiMessageReducer from './reducers/uiMessageReducer'
 
 const appReducer = combineReducers({
-  companies: companyReducer
+  companies: companyReducer,
+  uiMessages: uiMessageReducer
 })
 
 export const rootReducer = (state, action) => {

@@ -32,29 +32,29 @@ const StyledButton = styled(Button)`
   display: inline;
   float: right;
 
-  ${props => props.type == 'default' && css`
-    background: darkgrey;
-    color: black;
-    &:hover, &:active {
-      background: lightgrey;
-      color: black;
-    }
-  `}
+  //${props => props.btntype === 'default' && css`
+  //  background: darkgrey;
+  //  color: black;
+  //  &:hover, &:active {
+  //    background: lightgrey;
+  //    color: black;
+  //  }
+  //`}
 
-  ${props => props.type == 'primary' && css`
-      background: blueviolet;
-      color: white;
-      &:hover, &:active {
-        background: indigo;
-        color: white;
-      }
-    `}
+  //${props => props.btntype === 'primary' && css`
+  //    background: blueviolet;
+  //    color: white;
+  //    &:hover, &:active {
+  //      background: indigo;
+  //      color: white;
+  //    }
+  //  `}
 `
 
-const StyledLinkButton = ({ text, to, type }) => {
+const StyledLinkButton = ({ text, to, btntype }) => {
   return (
     <StyledLink to={to}>
-      <StyledButton type={type}>{text}</StyledButton>
+      <StyledButton btntype={btntype}>{text}</StyledButton>
     </StyledLink>
   )
 }

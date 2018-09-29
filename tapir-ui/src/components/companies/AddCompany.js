@@ -1,6 +1,8 @@
 ﻿import React from 'react'
 import { connect } from 'react-redux'
+import { withRouter } from 'react-router-dom'
 import { addCompany } from '../../actions/companyActions'
+import { addUIMessage } from '../../actions/uiMessageActions'
 import TapirHeader from '../ui-structure/TapirHeader'
 import { StyledLinkButton, StyledButton } from '../ui-structure/StyledComponents'
 import { Form, FormGroup, FormControl, ControlLabel, Col } from 'react-bootstrap'
@@ -15,21 +17,25 @@ class AddCompany extends React.Component {
     }
   }
 
-  handleChange = (event, { value }) => {
-    this.setState({ [event.target.name]: value })
+  handleChange = (event) => {
+    this.setState({ [event.target.name]: event.target.value })
   }
 
-  handleSubmit = async () => {
+  handleSubmit = async (event) => {
+    event.preventDefault()
     const company = {
       fullName: this.state.fullName,
       shortName: this.state.shortName
     }
     await this.props.addCompany(company)
     if (!this.props.error) {
-      // add success message
-
+      console.log('Adding success')
+      this.props.addUIMessage('Added company ' + company.fullName, 'success', 10)
+      this.setState({ fullName: "", shortName: "" })
+      this.props.history.push('/companies')
     } else {
-      // add failure message, stay in this view
+      console.log('Adding failure')
+      this.props.addUIMessage('Could not add the company', 'danger', 10)
     }
   }
 
@@ -52,7 +58,12 @@ class AddCompany extends React.Component {
               Full name
             </Col>
             <Col sm={6}>
-              <FormControl type='text' />
+              <FormControl
+                name='fullName'
+                type='text'
+                value={this.state.fullName}
+                onChange={this.handleChange}
+              />
             </Col>
           </FormGroup>
           <FormGroup controlId='companyShortName'>
@@ -60,12 +71,17 @@ class AddCompany extends React.Component {
               Short name
             </Col>
             <Col sm={6}>
-              <FormControl type='text' />
+              <FormControl
+                name='shortName'
+                type='text'
+                value={this.state.shortName}
+                onChange={this.handleChange}
+              />
             </Col>
           </FormGroup>
           <FormGroup>
             <Col smOffset={2} sm={6}>
-              <StyledButton type='primary'>Save</StyledButton>
+              <StyledButton type='primary' onClick={this.handleSubmit}>Save</StyledButton>
             </Col>
           </FormGroup>
         </Form>
@@ -80,9 +96,10 @@ const mapStateToProps = store => {
   }
 }
 
-export default connect(
-  null,
+export default withRouter(connect(
+  mapStateToProps,
   {
-    addCompany
+    addCompany,
+    addUIMessage
   }
-)(AddCompany)
+)(AddCompany))

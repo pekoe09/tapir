@@ -1,7 +1,6 @@
 ﻿import React from 'react'
 import { connect } from 'react-redux'
 import { getAllCompanies } from '../../actions/companyActions'
-import ReactTable from 'react-table'
 import TapirHeader from '../ui-structure/TapirHeader'
 import { StyledReactTable, StyledLinkButton } from '../ui-structure/StyledComponents'
 

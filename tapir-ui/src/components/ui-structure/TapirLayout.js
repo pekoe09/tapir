@@ -1,6 +1,7 @@
 ﻿import React from 'react'
 import TapirSidebar from './TapirSidebar'
 import TapirNavbar from './TapirNavbar'
+import TapirMessages from './TapirMessages'
 
 const TapirLayout = (props) => {
   return (
@@ -8,6 +9,7 @@ const TapirLayout = (props) => {
       <TapirSidebar />
       <div id='main'>
         <TapirNavbar />
+        <TapirMessages />
         {props.children}
       </div>
     </div>
