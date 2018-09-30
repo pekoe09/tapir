@@ -41,6 +41,7 @@ namespace Tapir.Models
             updatedCompany.FullName = company.FullName;
             updatedCompany.ShortName = company.ShortName;
             context.Companies.Update(updatedCompany);
+            context.SaveChanges();
             return updatedCompany;
         }
 
@@ -50,6 +51,7 @@ namespace Tapir.Models
             if(deletedCompany != null)
             {
                 context.Companies.Remove(deletedCompany);
+                context.SaveChanges();
                 return deletedCompany;
             }
             else
