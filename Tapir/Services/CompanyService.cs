@@ -55,7 +55,7 @@ namespace Tapir.Services
                 throw new ArgumentException("Short name is missing");
             }
             Company savedCompany = null;
-            if (company.ID.HasValue)
+            if (company.Id.HasValue)
             {
                 savedCompany = companiesRepository.Update(Company.Hydrate(company));
             }

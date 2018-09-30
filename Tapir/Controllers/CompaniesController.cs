@@ -50,7 +50,7 @@ namespace Tapir.Controllers
                 return BadRequest(ModelState);
             }
             CompanyDto newCompany = companyService.SaveCompany(company);
-            return CreatedAtRoute(routeName: "GetCompany", routeValues: new { id = newCompany.ID }, value: newCompany);
+            return CreatedAtRoute(routeName: "GetCompany", routeValues: new { id = newCompany.Id }, value: newCompany);
         }
 
         [HttpPut("{id}")]

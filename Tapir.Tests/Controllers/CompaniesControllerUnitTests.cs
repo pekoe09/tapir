@@ -12,9 +12,42 @@ namespace Tapir.Tests.UnitTests.Controllers
     {
         List<CompanyDto> companies = new List<CompanyDto>
         {
-            new CompanyDto() { ID = 1, FullName = "Company1 Ltd", ShortName = "Ltd1"},
-            new CompanyDto() { ID = 2, FullName = "Company2 Ltd", ShortName = "Ltd2"},
-            new CompanyDto() { ID = 3, FullName = "Company3 Ltd", ShortName = "Ltd3"}
+            new CompanyDto()
+            {
+                Id = 1,
+                FullName = "Company1 Ltd",
+                ShortName = "Ltd1",
+                BusinessId = "1111-1",
+                SectorId = 1,
+                SectorCode = "0001",
+                SectorName = "Agriculture",
+                InsuranceNumber = "1111",
+                BankAccount = "111-111"
+            },
+            new CompanyDto()
+            {
+                Id = 2,
+                FullName = "Company2 Ltd",
+                ShortName = "Ltd2",
+                BusinessId = "22222-2",
+                SectorId = 2,
+                SectorCode = "0002",
+                SectorName = "Mining",
+                InsuranceNumber = "2222",
+                BankAccount = "222-222"
+            },
+            new CompanyDto()
+            {
+                Id = 3,
+                FullName = "Company3 Ltd",
+                ShortName = "Ltd3",
+                BusinessId = "33333-3",
+                SectorId = 3,
+                SectorCode = "0003",
+                SectorName = "Oil refining",
+                InsuranceNumber = "3333",
+                BankAccount = "333-333"
+            }
         };
 
         [Fact]
@@ -32,7 +65,7 @@ namespace Tapir.Tests.UnitTests.Controllers
             Assert.Equal(companies.Count, resultList.Count);
             foreach (CompanyDto c in resultList)
             {
-                Assert.NotNull(companies.Find(o => o.ID == c.ID));
+                Assert.NotNull(companies.Find(o => o.Id == c.Id));
             }
         }
 
@@ -47,7 +80,7 @@ namespace Tapir.Tests.UnitTests.Controllers
 
             mockService.Verify(x => x.GetCompany(2), Times.Once);
             Assert.IsType<CompanyDto>(result.Value);
-            Assert.Equal(2, result.Value.ID);
+            Assert.Equal(2, result.Value.Id);
         }
 
         [Fact]
@@ -101,11 +134,14 @@ namespace Tapir.Tests.UnitTests.Controllers
             mockService.Setup(s => s.SaveCompany(It.IsAny<CompanyDto>())).Returns((CompanyDto c) => c);
             var controller = new CompaniesController(mockService.Object);
 
-            CompanyDto testCo = new CompanyDto() { ID = 2, FullName = "TestComp4", ShortName = "Test4" };
+            CompanyDto testCo = new CompanyDto() { Id = 2, FullName = "TestComp4", ShortName = "Test4" };
             var result = controller.Update(2, testCo);
 
             mockService.Verify(x => x.SaveCompany(It.IsAny<CompanyDto>()), Times.Once);
-            Assert.IsType<NoContentResult>(result.Result);
+            Assert.IsType<OkObjectResult>(result.Result);
+            OkObjectResult bottomResult = (OkObjectResult)result.Result;
+            Assert.IsType<CompanyDto>(bottomResult.Value);
+            Assert.Equal(2, ((CompanyDto)bottomResult.Value).Id);
         }
 
         [Fact]
@@ -115,7 +151,7 @@ namespace Tapir.Tests.UnitTests.Controllers
             var controller = new CompaniesController(mockService.Object);
             controller.ModelState.AddModelError("FullName", "Fullname not set");
 
-            CompanyDto testCo = new CompanyDto() { ID = 2, FullName = "TestComp4", ShortName = "Test4" };
+            CompanyDto testCo = new CompanyDto() { Id = 2, FullName = "TestComp4", ShortName = "Test4" };
             var result = controller.Create(testCo);
 
             mockService.Verify(x => x.SaveCompany(It.IsAny<CompanyDto>()), Times.Never);
@@ -129,7 +165,7 @@ namespace Tapir.Tests.UnitTests.Controllers
             mockService.Setup(s => s.SaveCompany(It.IsAny<CompanyDto>())).Returns((CompanyDto)null);
             var controller = new CompaniesController(mockService.Object);
 
-            CompanyDto testCo = new CompanyDto() { ID = 4, FullName = "TestComp4", ShortName = "Test4" };
+            CompanyDto testCo = new CompanyDto() { Id = 4, FullName = "TestComp4", ShortName = "Test4" };
             var result = controller.Update(4, testCo);
 
             mockService.Verify(x => x.SaveCompany(It.IsAny<CompanyDto>()), Times.Once);
@@ -146,7 +182,10 @@ namespace Tapir.Tests.UnitTests.Controllers
             var result = controller.Delete(2);
 
             mockService.Verify(x => x.RemoveCompany(2), Times.Once);
-            Assert.IsType<NoContentResult>(result.Result);
+            Assert.IsType<OkObjectResult>(result.Result);
+            OkObjectResult bottomResult = (OkObjectResult)result.Result;
+            Assert.IsType<CompanyDto>(bottomResult.Value);
+            Assert.Equal(2, ((CompanyDto)bottomResult.Value).Id);
         }
 
         [Fact]
