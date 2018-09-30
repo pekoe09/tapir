@@ -74,6 +74,13 @@ class CompaniesList extends React.Component {
       }
     },
     {
+      Header: 'Business ID',
+      accessor: 'businessId',
+      headerStyle: {
+        textAlign: 'left'
+      }
+    },
+    {
       Header: '',
       accessor: 'delete',
       Cell: (row) => (
