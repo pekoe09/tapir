@@ -4,8 +4,12 @@ import { persistStore, persistReducer } from 'redux-persist'
 import storage from 'redux-persist/lib/storage'
 import autoMergeLevel2 from 'redux-persist/lib/stateReconciler/autoMergeLevel2'
 
-const appReducer = combineReducers({
+import companyReducer from './reducers/companyReducer'
+import uiMessageReducer from './reducers/uiMessageReducer'
 
+const appReducer = combineReducers({
+  companies: companyReducer,
+  uiMessages: uiMessageReducer
 })
 
 export const rootReducer = (state, action) => {
@@ -14,7 +18,8 @@ export const rootReducer = (state, action) => {
             storage.removeItem(`persist:${key}`)
         })
         state = undefined
-    }
+  }
+  return appReducer(state, action)
 }
 
 export const persistConfig = {
