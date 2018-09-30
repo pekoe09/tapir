@@ -4,13 +4,18 @@
   COMPANIES_GETALL_FAILURE,
   COMPANY_CREATE_BEGIN,
   COMPANY_CREATE_SUCCESS,
-  COMPANY_CREATE_FAILURE
+  COMPANY_CREATE_FAILURE,
+  COMPANY_DELETE_BEGIN,
+  COMPANY_DELETE_SUCCESS,
+  COMPANY_DELETE_FAILURE
 } from '../actions/companyActions'
+import { compileFunction } from 'vm';
 
 const initialState = {
   items: [],
   loading: false,
   creating: false,
+  deleting: false,
   error: null
 }
 
@@ -52,6 +57,25 @@ const companyReducer = (store = initialState, action) => {
       return {
         ...store,
         creating: false,
+        error: action.payload.error
+      }
+    case COMPANY_DELETE_BEGIN:
+      return {
+        ...store,
+        deleting: true,
+        error: null
+      }
+    case COMPANY_DELETE_SUCCESS:
+      return {
+        ...store,
+        items: store.items.filter(c => c.id !== action.payload.company.id),
+        deleting: false,
+        error: null
+      }
+    case COMPANY_DELETE_FAILURE:
+      return {
+        ...store,
+        deleting: false,
         error: action.payload.error
       }
     default:

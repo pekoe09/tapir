@@ -72,7 +72,7 @@ namespace Tapir.Controllers
         }
 
         [HttpDelete("{id}")]
-        [ProducesResponseType(204)]
+        [ProducesResponseType(200)]
         [ProducesResponseType(404)]
         public ActionResult<CompanyDto> Delete(int id)
         {
@@ -81,7 +81,7 @@ namespace Tapir.Controllers
             {
                 return NotFound();
             }
-            return NoContent();
+            return Ok(deletedCompany);
         }
     }
 }

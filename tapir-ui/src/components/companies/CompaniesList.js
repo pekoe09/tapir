@@ -1,6 +1,7 @@
 ﻿import React from 'react'
 import { connect } from 'react-redux'
-import { getAllCompanies } from '../../actions/companyActions'
+import { getAllCompanies, deleteCompany } from '../../actions/companyActions'
+import { addUIMessage } from '../../actions/uiMessageActions'
 import TapirHeader from '../ui-structure/TapirHeader'
 import { StyledReactTable, StyledLinkButton, StyledButton, StyleModal, StyledModal } from '../ui-structure/StyledComponents'
 import { Modal } from 'react-bootstrap'
@@ -33,8 +34,12 @@ class CompaniesList extends React.Component {
       deleteConfirmVisible: false,
       rowToDelete: null
     })
-    // call remove method
-    // if not error, add success message, else add failure message
+    this.props.deleteCompany(this.state.rowToDelete.id)
+    if (!this.props.error) {
+      this.props.addUIMessage('Deleted ' + this.state.rowToDelete.fullName, 'success', 10)
+    } else {
+      this.props.addUIMessage('Could not delete ' + this.state.rowToDelete.fullName, 'danger', 10)
+    }
   }
 
   handleCancelledDelete = () => {
@@ -127,12 +132,15 @@ class CompaniesList extends React.Component {
 }
 
 const mapStateToProps = store => ({
-  companies: store.companies.items
+  companies: store.companies.items,
+  error: store.companies.error
 })
 
 export default connect(
   mapStateToProps,
   {
-    getAllCompanies
+    getAllCompanies,
+    deleteCompany,
+    addUIMessage
   }
 )(CompaniesList)

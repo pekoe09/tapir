@@ -8,12 +8,17 @@ const getAll = async () => {
 }
 
 const addCompany = async (company) => {
-  console.log('Posting company ', company)
   const response = await axios.post(baseUrl, company)
+  return response.data
+}
+
+const removeCompany = async (id) => {
+  const response = await axios.delete(`${baseUrl}/${id}`)
   return response.data
 }
 
 export default {
   getAll,
-  addCompany
+  addCompany,
+  removeCompany
 }
