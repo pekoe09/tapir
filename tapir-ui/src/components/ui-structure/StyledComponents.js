@@ -1,7 +1,7 @@
 ﻿import React from 'react'
 import styled, { css } from 'styled-components'
 import ReactTable from 'react-table'
-import { Button, Modal } from 'react-bootstrap'
+import { Button, Modal, Form, FormControl } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 
 const StyledReactTable = styled(ReactTable)`
@@ -10,6 +10,16 @@ const StyledReactTable = styled(ReactTable)`
 
 const StyledModal = styled(Modal)`
   
+`
+
+const StyledForm = styled(Form)`
+  margin: 15px;
+  font-size: 0.8em;
+`
+
+const StyledFormControl = styled(FormControl)`
+  font-size: 1.2em;
+  height: fit-content;
 `
 
 const StyledLink = styled(Link)`
@@ -90,6 +100,8 @@ const StyledLinkButton = ({ text, to, btntype }) => {
 export {
   StyledReactTable,
   StyledButton,
+  StyledForm,
+  StyledFormControl,
   StyledLink,
   StyledLinkButton,
   StyledModal

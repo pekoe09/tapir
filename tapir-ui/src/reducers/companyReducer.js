@@ -5,6 +5,9 @@
   COMPANY_CREATE_BEGIN,
   COMPANY_CREATE_SUCCESS,
   COMPANY_CREATE_FAILURE,
+  COMPANY_UPDATE_BEGIN,
+  COMPANY_UPDATE_SUCCESS,
+  COMPANY_UDPATE_FAILURE,
   COMPANY_DELETE_BEGIN,
   COMPANY_DELETE_SUCCESS,
   COMPANY_DELETE_FAILURE
@@ -15,6 +18,7 @@ const initialState = {
   items: [],
   loading: false,
   creating: false,
+  updating: false,
   deleting: false,
   error: null
 }
@@ -57,6 +61,26 @@ const companyReducer = (store = initialState, action) => {
       return {
         ...store,
         creating: false,
+        error: action.payload.error
+      }
+    case COMPANY_UPDATE_BEGIN:
+      return {
+        ...store,
+        updating: true,
+        error: null
+      }
+    case COMPANY_UPDATE_SUCCESS:
+      const updated = action.payload.company
+      return {
+        ...store,
+        items: store.items.map(c => c.id === updated.id ? updated : c),
+        updating: false,
+        error: null
+      }
+    case COMPANY_UDPATE_FAILURE:
+      return {
+        ...store,
+        updating: false,
         error: action.payload.error
       }
     case COMPANY_DELETE_BEGIN:

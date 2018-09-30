@@ -1,4 +1,5 @@
 ﻿import React from 'react'
+import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { getAllCompanies, deleteCompany } from '../../actions/companyActions'
 import { addUIMessage } from '../../actions/uiMessageActions'
@@ -18,6 +19,14 @@ class CompaniesList extends React.Component {
 
   componentDidMount = async () => {
     await this.props.getAllCompanies()
+  }
+
+  handleRowClick = (state, rowInfo) => {
+    return {
+      onClick: (e) => {
+        this.props.history.push(`/companies/edit/${rowInfo.original.id}`)
+      }
+    }
   }
 
   handleDelete = (row, e) => {
@@ -100,6 +109,7 @@ class CompaniesList extends React.Component {
         <StyledReactTable
           data={this.props.companies}
           columns={this.columns}
+          getTrProps={this.handleRowClick}
           defaultPageSize={50}
           minRows={1}
         />
@@ -136,11 +146,11 @@ const mapStateToProps = store => ({
   error: store.companies.error
 })
 
-export default connect(
+export default withRouter(connect(
   mapStateToProps,
   {
     getAllCompanies,
     deleteCompany,
     addUIMessage
   }
-)(CompaniesList)
+)(CompaniesList))

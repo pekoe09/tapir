@@ -12,6 +12,13 @@ const addCompany = async (company) => {
   return response.data
 }
 
+const updateCompany = async (company) => {
+  console.log('Updating company', company)
+  const response = await axios.put(`${baseUrl}/${company.id}`, company)
+  console.log('got response', response)
+  return response.data
+}
+
 const removeCompany = async (id) => {
   const response = await axios.delete(`${baseUrl}/${id}`)
   return response.data
@@ -20,5 +27,6 @@ const removeCompany = async (id) => {
 export default {
   getAll,
   addCompany,
+  updateCompany,
   removeCompany
 }

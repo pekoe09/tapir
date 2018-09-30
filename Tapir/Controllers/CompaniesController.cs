@@ -11,7 +11,7 @@ namespace Tapir.Controllers
     [Route("api/[controller]")]
     [ApiController]
     public class CompaniesController : ControllerBase
-    {
+        {
         private ICompanyService companyService;
 
         public CompaniesController(ICompanyService companyService)
@@ -54,7 +54,7 @@ namespace Tapir.Controllers
         }
 
         [HttpPut("{id}")]
-        [ProducesResponseType(204)]
+        [ProducesResponseType(200)]
         [ProducesResponseType(400)]
         [ProducesResponseType(404)]
         public ActionResult<CompanyDto> Update(int id, CompanyDto company)
@@ -68,7 +68,7 @@ namespace Tapir.Controllers
             {
                 return NotFound();
             }
-            return NoContent();
+            return Ok(updatedCompany);
         }
 
         [HttpDelete("{id}")]

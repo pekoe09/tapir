@@ -6,6 +6,9 @@ export const COMPANIES_GETALL_FAILURE = 'COMPANIES_GETALL_FAILURE'
 export const COMPANY_CREATE_BEGIN = 'COMPANIES_CREATE_BEGIN'
 export const COMPANY_CREATE_SUCCESS = 'COMPANY_CREATE_SUCCESS'
 export const COMPANY_CREATE_FAILURE = 'COMPANY_CREATE_FAILURE'
+export const COMPANY_UPDATE_BEGIN = 'COMPANY_UPDATE_BEGIN'
+export const COMPANY_UPDATE_SUCCESS = 'COMPANY_UPDATE_SUCCESS'
+export const COMPANY_UDPATE_FAILURE = 'COMPANY_UPDATE_FAILURE'
 export const COMPANY_DELETE_BEGIN = 'COMPANY_DELETE_BEGIN'
 export const COMPANY_DELETE_SUCCESS = 'COMPANY_DELETE_SUCCESS'
 export const COMPANY_DELETE_FAILURE = 'COMPANY_DELETE_FAILURE'
@@ -35,6 +38,20 @@ const addCompanySuccess = company => ({
 
 const addCompanyFailure = error => ({
   type: COMPANY_CREATE_FAILURE,
+  payload: { error }
+})
+
+const updateCompanyBegin = () => ({
+  type: COMPANY_UPDATE_BEGIN
+})
+
+const updateCompanySuccess = company => ({
+  type: COMPANY_UPDATE_SUCCESS,
+  payload: { company }
+})
+
+const updateCompanyFailure = error => ({
+  type: COMPANY_UDPATE_FAILURE,
   payload: { error }
 })
 
@@ -74,6 +91,19 @@ export const addCompany = (company) => {
     } catch (error) {
       console.log(error)
       dispatch(addCompanyFailure(error))
+    }
+  }
+}
+
+export const updateCompany = (company) => {
+  return async (dispatch) => {
+    dispatch(updateCompanyBegin())
+    try {
+      company = await companiesService.updateCompany(company)
+      dispatch(updateCompanySuccess(company))
+    } catch (error) {
+      console.log(error)
+      dispatch(updateCompanyFailure(error))
     }
   }
 }
