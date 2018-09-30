@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace Tapir.Models
 {
@@ -16,12 +17,12 @@ namespace Tapir.Models
 
         public IEnumerable<Company> GetAll()
         {
-            return context.Companies.AsEnumerable();
+            return context.Companies.Include(c => c.Sector).AsEnumerable();
         }
 
         public Company GetById(int id)
         {
-            return context.Companies.Single(c => c.ID == id);
+            return context.Companies.Include(c => c.Sector).Single(c => c.ID == id);
         }
 
         public Company Insert(Company company)
