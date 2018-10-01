@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
+﻿using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using Tapir.Core;
 
@@ -11,7 +7,7 @@ namespace Tapir.Controllers
     [Route("api/[controller]")]
     [ApiController]
     public class CompaniesController : ControllerBase
-        {
+    {
         private ICompanyService companyService;
 
         public CompaniesController(ICompanyService companyService)
@@ -64,7 +60,7 @@ namespace Tapir.Controllers
                 return BadRequest(ModelState);
             }
             CompanyDto updatedCompany = companyService.SaveCompany(company);
-            if(updatedCompany == null)
+            if (updatedCompany == null)
             {
                 return NotFound();
             }
