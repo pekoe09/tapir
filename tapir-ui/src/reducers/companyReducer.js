@@ -12,7 +12,6 @@
   COMPANY_DELETE_SUCCESS,
   COMPANY_DELETE_FAILURE
 } from '../actions/companyActions'
-import { compileFunction } from 'vm';
 
 const initialState = {
   items: [],

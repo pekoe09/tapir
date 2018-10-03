@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
+﻿using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using Tapir.Core;
 
@@ -11,7 +7,7 @@ namespace Tapir.Controllers
     [Route("api/[controller]")]
     [ApiController]
     public class CompaniesController : ControllerBase
-        {
+    {
         private ICompanyService companyService;
 
         public CompaniesController(ICompanyService companyService)
@@ -21,18 +17,18 @@ namespace Tapir.Controllers
 
         [HttpGet]
         [ProducesResponseType(200)]
-        public ActionResult<List<CompanyDto>> GetAll()
+        public ActionResult<List<CompanyDTO>> GetAll()
         {
-            List<CompanyDto> companies = companyService.GetCompanies();
+            List<CompanyDTO> companies = companyService.GetCompanies();
             return companies;
         }
 
         [HttpGet("{id}", Name = "GetCompany")]
         [ProducesResponseType(200)]
         [ProducesResponseType(404)]
-        public ActionResult<CompanyDto> GetById(int id)
+        public ActionResult<CompanyDTO> GetById(int id)
         {
-            CompanyDto company = companyService.GetCompany(id);
+            CompanyDTO company = companyService.GetCompany(id);
             if (company == null)
             {
                 return NotFound();
@@ -43,28 +39,28 @@ namespace Tapir.Controllers
         [HttpPost]
         [ProducesResponseType(200)]
         [ProducesResponseType(400)]
-        public ActionResult<CompanyDto> Create(CompanyDto company)
+        public ActionResult<CompanyDTO> Create(CompanyDTO company)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
-            CompanyDto newCompany = companyService.SaveCompany(company);
-            return CreatedAtRoute(routeName: "GetCompany", routeValues: new { id = newCompany.ID }, value: newCompany);
+            CompanyDTO newCompany = companyService.SaveCompany(company);
+            return CreatedAtRoute(routeName: "GetCompany", routeValues: new { id = newCompany.Id }, value: newCompany);
         }
 
         [HttpPut("{id}")]
         [ProducesResponseType(200)]
         [ProducesResponseType(400)]
         [ProducesResponseType(404)]
-        public ActionResult<CompanyDto> Update(int id, CompanyDto company)
+        public ActionResult<CompanyDTO> Update(int id, CompanyDTO company)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
-            CompanyDto updatedCompany = companyService.SaveCompany(company);
-            if(updatedCompany == null)
+            CompanyDTO updatedCompany = companyService.SaveCompany(company);
+            if (updatedCompany == null)
             {
                 return NotFound();
             }
@@ -74,9 +70,9 @@ namespace Tapir.Controllers
         [HttpDelete("{id}")]
         [ProducesResponseType(200)]
         [ProducesResponseType(404)]
-        public ActionResult<CompanyDto> Delete(int id)
+        public ActionResult<CompanyDTO> Delete(int id)
         {
-            CompanyDto deletedCompany = companyService.RemoveCompany(id);
+            CompanyDTO deletedCompany = companyService.RemoveCompany(id);
             if (deletedCompany == null)
             {
                 return NotFound();
