@@ -6,14 +6,30 @@ import { addUIMessage } from '../../actions/uiMessageActions'
 import TapirHeader from '../ui-structure/TapirHeader'
 import { StyledLinkButton, StyledButton, StyledForm, StyledFormControl } from '../ui-structure/StyledComponents'
 import { FormGroup, ControlLabel } from 'react-bootstrap'
+import { Typeahead } from 'react-bootstrap-typeahead'
 
 class EditCompany extends React.Component {
 
   constructor(props) {
     super(props)
-    this.state = {
-      fullName: this.props.initialCompany ? this.props.initialCompany.fullName : '',
-      shortName: this.props.initialCompany ? this.props.initialCompany.shortName : ''
+    if (this.props.initialCompany) {
+      this.state = {
+        fullName: this.props.initialCompany.fullName,
+        shortName: this.props.initialCompany.shortName,
+        businessId: this.props.initialCompany.businessId,
+        selectedSector: [this.props.initialSector],
+        insuranceNumber: this.props.initialCompany.insuranceNumber,
+        bankAccount: this.props.initialCompany.bankAccount
+      }
+    } else {
+      this.state = {
+        fullName: '',
+        shortName: '',
+        businessId: '',
+        selectedSector: [],
+        insuranceNumber: '',
+        bankAccount: ''
+      }
     }
   }
 
@@ -21,12 +37,20 @@ class EditCompany extends React.Component {
     this.setState({ [event.target.name]: event.target.value })
   }
 
+  handleSectorChange = (selected) => {
+    this.setState({ selectedSector: selected })
+  }
+
   handleSubmit = async (event) => {
     event.preventDefault()
     const company = {
       id: this.props.initialCompany.id,
       fullName: this.state.fullName,
-      shortName: this.state.shortName
+      shortName: this.state.shortName,
+      businessId: this.state.businessId,
+      sectorId: this.state.selectedSector[0].id,
+      insuranceNumber: this.state.insuranceNumber,
+      bankAccount: this.state.bankAccount
     }
     await this.props.updateCompany(company)
     if (!this.props.error) {
@@ -71,6 +95,45 @@ class EditCompany extends React.Component {
               onChange={this.handleChange}
             />
           </FormGroup>
+          <FormGroup controlId='companyBusinessId'>
+            <ControlLabel>Business Id</ControlLabel>
+            <StyledFormControl
+              name='businessId'
+              type='text'
+              value={this.state.businessId}
+              onChange={this.handleChange}
+            />
+          </FormGroup>
+          <FormGroup controlId='companyBusinessSector'>
+            <ControlLabel>Business sector</ControlLabel>
+            <Typeahead
+              options={this.props.businessSectors}
+              onChange={(selected) => { this.handleSectorChange(selected) }}
+              selected={this.state.selectedSector}
+              labelKey='name'
+              ignoreDiacritics={false}
+              minLength={3}
+              selectHintOnEnter={true}
+            />
+          </FormGroup>
+          <FormGroup controlId='companyInsuranceNumber'>
+            <ControlLabel>Insurance number</ControlLabel>
+            <StyledFormControl
+              name='insuranceNumber'
+              type='text'
+              value={this.state.insuranceNumber}
+              onChange={this.handleChange}
+            />
+          </FormGroup>
+          <FormGroup controlId='companyBankAccount'>
+            <ControlLabel>Bank account</ControlLabel>
+            <StyledFormControl
+              name='bankAccount'
+              type='text'
+              value={this.state.bankAccount}
+              onChange={this.handleChange}
+            />
+          </FormGroup>
           <FormGroup>
             <StyledButton
               type='primary'
@@ -85,10 +148,16 @@ class EditCompany extends React.Component {
   }
 }
 
-const mapStateToProps = (store, ownProps) => ({
-    initialCompany: store.companies.items.find(c => c.id.toString() === ownProps.match.params.id.toString()),
-    error: store.companies.error
-})
+const mapStateToProps = (store, ownProps) => {
+  const initialCompany = store.companies.items.find(c => c.id.toString() === ownProps.match.params.id.toString())
+  const initialSector = store.businessSectors.items.find(s => s.id === initialCompany.sectorId)
+  return {
+    initialCompany,
+    error: store.companies.error,
+    businessSectors: store.businessSectors.items,
+    initialSector
+  }
+}
 
 export default withRouter(connect(
   mapStateToProps,

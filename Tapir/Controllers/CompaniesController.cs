@@ -17,18 +17,18 @@ namespace Tapir.Controllers
 
         [HttpGet]
         [ProducesResponseType(200)]
-        public ActionResult<List<CompanyDto>> GetAll()
+        public ActionResult<List<CompanyDTO>> GetAll()
         {
-            List<CompanyDto> companies = companyService.GetCompanies();
+            List<CompanyDTO> companies = companyService.GetCompanies();
             return companies;
         }
 
         [HttpGet("{id}", Name = "GetCompany")]
         [ProducesResponseType(200)]
         [ProducesResponseType(404)]
-        public ActionResult<CompanyDto> GetById(int id)
+        public ActionResult<CompanyDTO> GetById(int id)
         {
-            CompanyDto company = companyService.GetCompany(id);
+            CompanyDTO company = companyService.GetCompany(id);
             if (company == null)
             {
                 return NotFound();
@@ -39,13 +39,13 @@ namespace Tapir.Controllers
         [HttpPost]
         [ProducesResponseType(200)]
         [ProducesResponseType(400)]
-        public ActionResult<CompanyDto> Create(CompanyDto company)
+        public ActionResult<CompanyDTO> Create(CompanyDTO company)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
-            CompanyDto newCompany = companyService.SaveCompany(company);
+            CompanyDTO newCompany = companyService.SaveCompany(company);
             return CreatedAtRoute(routeName: "GetCompany", routeValues: new { id = newCompany.Id }, value: newCompany);
         }
 
@@ -53,13 +53,13 @@ namespace Tapir.Controllers
         [ProducesResponseType(200)]
         [ProducesResponseType(400)]
         [ProducesResponseType(404)]
-        public ActionResult<CompanyDto> Update(int id, CompanyDto company)
+        public ActionResult<CompanyDTO> Update(int id, CompanyDTO company)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
-            CompanyDto updatedCompany = companyService.SaveCompany(company);
+            CompanyDTO updatedCompany = companyService.SaveCompany(company);
             if (updatedCompany == null)
             {
                 return NotFound();
@@ -70,9 +70,9 @@ namespace Tapir.Controllers
         [HttpDelete("{id}")]
         [ProducesResponseType(200)]
         [ProducesResponseType(404)]
-        public ActionResult<CompanyDto> Delete(int id)
+        public ActionResult<CompanyDTO> Delete(int id)
         {
-            CompanyDto deletedCompany = companyService.RemoveCompany(id);
+            CompanyDTO deletedCompany = companyService.RemoveCompany(id);
             if (deletedCompany == null)
             {
                 return NotFound();

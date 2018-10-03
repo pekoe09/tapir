@@ -25,9 +25,9 @@ namespace Tapir.Models
         public string BankAccount { get; set; }
         public ICollection<Employment> Employments { get; set; }
 
-        internal CompanyDto getDTO()
+        internal CompanyDTO getDTO()
         {
-            return new CompanyDto()
+            return new CompanyDTO()
             {
                 Id = this.ID,
                 FullName = this.FullName,
@@ -41,7 +41,7 @@ namespace Tapir.Models
             };
         }
 
-        internal static Company Hydrate(CompanyDto dto)
+        internal static Company Hydrate(CompanyDTO dto)
         {
             Company company = new Company()
             {

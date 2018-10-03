@@ -14,10 +14,10 @@ namespace Tapir.Services
             this.companiesRepository = companiesRepository;
         }
 
-        public List<CompanyDto> GetCompanies()
+        public List<CompanyDTO> GetCompanies()
         {
             IEnumerable<Company> companies = companiesRepository.GetAll();
-            List<CompanyDto> companyDtos = new List<CompanyDto>();
+            List<CompanyDTO> companyDtos = new List<CompanyDTO>();
             foreach (Company c in companies)
             {
                 companyDtos.Add(c.getDTO());
@@ -25,7 +25,7 @@ namespace Tapir.Services
             return companyDtos;
         }
 
-        public CompanyDto GetCompany(int id)
+        public CompanyDTO GetCompany(int id)
         {
             Company company = companiesRepository.GetById(id);
             if (company != null)
@@ -38,7 +38,7 @@ namespace Tapir.Services
             }
         }
 
-        public CompanyDto SaveCompany(CompanyDto company)
+        public CompanyDTO SaveCompany(CompanyDTO company)
         {
             if (company == null)
             {
@@ -71,9 +71,9 @@ namespace Tapir.Services
             }
         }
 
-        public CompanyDto RemoveCompany(int id)
+        public CompanyDTO RemoveCompany(int id)
         {
-            CompanyDto deletedCompany = GetCompany(id);
+            CompanyDTO deletedCompany = GetCompany(id);
             if (deletedCompany != null)
             {
                 companiesRepository.Remove(id);

@@ -49,7 +49,7 @@ namespace Tapir.Controllers
             return CreatedAtRoute(routeName: "GetBusinessSector", routeValues: new { id = newSector.Id }, value: newSector);
         }
 
-        [HttpPut("{id}"]
+        [HttpPut("{id}")]
         [ProducesResponseType(200)]
         [ProducesResponseType(400)]
         [ProducesResponseType(404)]

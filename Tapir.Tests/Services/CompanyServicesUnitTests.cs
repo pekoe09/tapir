@@ -75,7 +75,7 @@ namespace Tapir.UnitTests.Services
         {
             var result = companyService.GetCompanies();
 
-            Assert.IsType<List<CompanyDto>>(result);
+            Assert.IsType<List<CompanyDTO>>(result);
             Assert.Equal(3, result.Count);
         }
 
@@ -84,8 +84,8 @@ namespace Tapir.UnitTests.Services
         {
             var result = companyService.GetCompany(2);
 
-            Assert.IsType<CompanyDto>(result);
-            Assert.Equal(2, ((CompanyDto)result).Id);
+            Assert.IsType<CompanyDTO>(result);
+            Assert.Equal(2, ((CompanyDTO)result).Id);
         }
 
         [Fact]
@@ -118,7 +118,7 @@ namespace Tapir.UnitTests.Services
                 });
             CompanyService service = new CompanyService(mockRepository.Object);
 
-            CompanyDto dto = new CompanyDto()
+            CompanyDTO dto = new CompanyDTO()
             {
                 FullName = "Company 4",
                 ShortName = "Cny4",
@@ -132,7 +132,7 @@ namespace Tapir.UnitTests.Services
             var result = service.SaveCompany(dto);
 
             mockRepository.Verify(x => x.Insert(It.IsAny<Company>()), Times.Once);
-            Assert.IsType<CompanyDto>(result);
+            Assert.IsType<CompanyDTO>(result);
             Assert.Equal(dto.FullName, result.FullName);
             Assert.Equal(dto.ShortName, result.ShortName);
             Assert.Equal(dto.BusinessId, result.BusinessId);
@@ -162,7 +162,7 @@ namespace Tapir.UnitTests.Services
             var mockRepository = new Mock<ICompaniesRepository>();
             CompanyService service = new CompanyService(mockRepository.Object);
 
-            CompanyDto dto = new CompanyDto()
+            CompanyDTO dto = new CompanyDTO()
             {
                 FullName = fullName,
                 ShortName = "Cny4"
@@ -181,7 +181,7 @@ namespace Tapir.UnitTests.Services
             var mockRepository = new Mock<ICompaniesRepository>();
             CompanyService service = new CompanyService(mockRepository.Object);
 
-            CompanyDto dto = new CompanyDto()
+            CompanyDTO dto = new CompanyDTO()
             {
                 FullName = "Company 4",
                 ShortName = shortName
@@ -199,7 +199,7 @@ namespace Tapir.UnitTests.Services
                 .Returns((Company c) => c);
             CompanyService service = new CompanyService(mockRepository.Object);
 
-            CompanyDto dto = new CompanyDto()
+            CompanyDTO dto = new CompanyDTO()
             {
                 Id = 2,
                 FullName = "Company 2 new name",
@@ -209,7 +209,7 @@ namespace Tapir.UnitTests.Services
 
             mockRepository.Verify(x => x.Update(It.IsAny<Company>()), Times.Once);
             mockRepository.Verify(x => x.Insert(It.IsAny<Company>()), Times.Never);
-            Assert.IsType<CompanyDto>(result);
+            Assert.IsType<CompanyDTO>(result);
             Assert.Equal(dto.FullName, result.FullName);
             Assert.Equal(dto.ShortName, result.ShortName);
             Assert.Equal(dto.Id, result.Id);
@@ -224,7 +224,7 @@ namespace Tapir.UnitTests.Services
             var mockRepository = new Mock<ICompaniesRepository>();
             CompanyService service = new CompanyService(mockRepository.Object);
 
-            CompanyDto dto = new CompanyDto()
+            CompanyDTO dto = new CompanyDTO()
             {
                 Id = 2,
                 FullName = fullName,
@@ -245,7 +245,7 @@ namespace Tapir.UnitTests.Services
             var mockRepository = new Mock<ICompaniesRepository>();
             CompanyService service = new CompanyService(mockRepository.Object);
 
-            CompanyDto dto = new CompanyDto()
+            CompanyDTO dto = new CompanyDTO()
             {
                 FullName = "Company 4",
                 ShortName = shortName
@@ -262,7 +262,7 @@ namespace Tapir.UnitTests.Services
             var mockRepository = new Mock<ICompaniesRepository>();
             mockRepository.Setup(x => x.Update(It.IsAny<Company>())).Returns((Company)null);
             CompanyService service = new CompanyService(mockRepository.Object);
-            CompanyDto dto = new CompanyDto()
+            CompanyDTO dto = new CompanyDTO()
             {
                 Id = 4,
                 FullName = "Company 4",
@@ -286,7 +286,7 @@ namespace Tapir.UnitTests.Services
             var result = service.RemoveCompany(2);
 
             mockRepository.Verify(x => x.Remove(2), Times.Once);
-            Assert.IsType<CompanyDto>(result);
+            Assert.IsType<CompanyDTO>(result);
             Assert.Equal(companies[1].FullName, result.FullName);
             Assert.Equal(companies[1].ShortName, result.ShortName);
             Assert.Equal(companies[1].ID, result.Id);

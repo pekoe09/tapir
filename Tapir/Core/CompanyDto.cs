@@ -2,7 +2,7 @@
 
 namespace Tapir.Core
 {
-    public class CompanyDto
+    public class CompanyDTO
     {
         public int? Id { get; set; }
         [Required]

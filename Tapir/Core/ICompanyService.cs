@@ -4,9 +4,9 @@ namespace Tapir.Core
 {
     public interface ICompanyService
     {
-        List<CompanyDto> GetCompanies();
-        CompanyDto GetCompany(int ID);
-        CompanyDto SaveCompany(CompanyDto company);
-        CompanyDto RemoveCompany(int ID);
+        List<CompanyDTO> GetCompanies();
+        CompanyDTO GetCompany(int ID);
+        CompanyDTO SaveCompany(CompanyDTO company);
+        CompanyDTO RemoveCompany(int ID);
     }
 }
