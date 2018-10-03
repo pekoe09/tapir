@@ -33,6 +33,8 @@ namespace Tapir
             services.AddDbContext<TapirContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("TapirContext")));
 
+            services.AddScoped<IBusinessSectorRepository, BusinessSectorRepository>();
+            services.AddScoped<IBusinessSectorService, BusinessSectorService>();
             services.AddScoped<ICompaniesRepository, CompaniesRepository>();
             services.AddScoped<ICompanyService, CompanyService>();
             services.AddScoped<IPersonsRepository, PersonsRepository>();
