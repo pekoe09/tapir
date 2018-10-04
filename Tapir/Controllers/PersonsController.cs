@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using Tapir.Core;
 
@@ -53,7 +50,7 @@ namespace Tapir.Controllers
         }
 
         [HttpPut("{id}")]
-        [ProducesResponseType(204)]
+        [ProducesResponseType(200)]
         [ProducesResponseType(400)]
         [ProducesResponseType(404)]
         public ActionResult<PersonDTO> Update(int id, PersonDTO person)
@@ -67,11 +64,11 @@ namespace Tapir.Controllers
             {
                 return NotFound();
             }
-            return NoContent();
+            return Ok(updatedPerson);
         }
 
         [HttpDelete("{id}")]
-        [ProducesResponseType(204)]
+        [ProducesResponseType(200)]
         [ProducesResponseType(404)]
         public ActionResult<PersonDTO> Delete(int id)
         {
@@ -80,7 +77,7 @@ namespace Tapir.Controllers
             {
                 return NotFound();
             }
-            return NoContent();
+            return Ok(deletedPerson);
         }
     }
 }
