@@ -81,7 +81,7 @@ namespace Tapir.Models
                 PositionInCompany = this.PositionInCompany,
                 PlaceOfRegularEmployment = this.PlaceOfRegularEmployment,
                 CityOfRegularEmployment = this.CityOfRegularEmployment,
-                RegularEmploymentAddress = this.RegularEmploymentAddress.GetDTO()
+                RegularEmploymentAddress = this.RegularEmploymentAddress!= null ? this.RegularEmploymentAddress.GetDTO() : null
             };
         }
 

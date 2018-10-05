@@ -13,9 +13,7 @@ const addCompany = async (company) => {
 }
 
 const updateCompany = async (company) => {
-  console.log('Updating company', company)
   const response = await axios.put(`${baseUrl}/${company.id}`, company)
-  console.log('got response', response)
   return response.data
 }
 

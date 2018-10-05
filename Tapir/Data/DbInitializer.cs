@@ -62,9 +62,77 @@ namespace Tapir.Models
 
             var persons = new Person[]
             {
-                new Person{LastName="Avanne", FirstNames="Aarne Aatami", DOB=new DateTime(1960, 6, 30)},
-                new Person{LastName="Bergström", FirstNames="Bertta Berit", DOB=new DateTime(1971, 12, 31)},
-                new Person{LastName="Cronqvist", FirstNames="Cecilia Cella", DOB=new DateTime(1982, 1, 13)}
+                new Person{
+                    LastName = "Avanne",
+                    FirstNames = "Aarne Aatami",
+                    SSN = "111111-1111",
+                    Address = new Address
+                    {
+                        Street1 = "Testikatu 1",
+                        Zip = "11111",
+                        City = "1City",
+                        Country = "1Country"
+                    },
+                    Email = "aarne.avanne@a.com",
+                    Phone = "+358 111 111",
+                    Language = "FI",
+                    Citizenship = "Finnish",
+                    Profession = "Avantouimari",
+                    IBAN = "FI111100001111",
+                    IsOwner = false
+                },
+                new Person{
+                    LastName = "Bergström",
+                    FirstNames = "Bertta Berit",
+                    SSN = "222222-2222",
+                    Address = new Address
+                    {
+                        Street1 = "Testikatu 2",
+                        Zip = "22222",
+                        City = "2City",
+                        Country = "2Country"
+                    },
+                    Email = "bertta.bergstrom@b.com",
+                    Phone = "+358 222 222",
+                    Language = "SE",
+                    Citizenship = "Finnish",
+                    Profession = "Borgmästare",
+                    IBAN = "FI222200002222",
+                    IsOwner = true,
+                    OwnershipSelf = 75.1,
+                    VotesSelf = 90.2,
+                    OwnershipWithFamily = 85.0,
+                    VotesWithFamily = 95.3,
+                    PositionInCompany = "Chairperson",
+                    PlaceOfRegularEmployment = "Huvudkontor",
+                    CityOfRegularEmployment = "Helsingfors",
+                    RegularEmploymentAddress = new Address
+                    {
+                        Street1 = "Kaivokatu 2",
+                        Zip = "00100",
+                        City = "Helsingfors",
+                        Country = "Finland"
+                    }
+                },
+                new Person{
+                    LastName = "Cronqvist",
+                    FirstNames = "Cecilia Cella",
+                    SSN = "333333-3333",
+                    Address = new Address
+                    {
+                        Street1 = "Testikatu 3",
+                        Zip = "33333",
+                        City = "3City",
+                        Country = "3Country"
+                    },
+                    Email = "cella@c.com",
+                    Phone = "+358 333 333",
+                    Language = "SE",
+                    Citizenship = "Swedish",
+                    Profession = "Chantreuse",
+                    IBAN = "FI333300003333",
+                    IsOwner = false
+                }
             };
             foreach (Person p in persons)
             {
