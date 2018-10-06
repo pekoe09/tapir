@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
-import { addPerson } from '../../actions/personActions'
+import { updatePerson } from '../../actions/personActions'
 import { addUIMessage } from '../../actions/uiMessageActions'
 import TapirHeader from '../ui-structure/TapirHeader'
 import {
@@ -17,30 +17,54 @@ import Address from '../general/Address'
 import { FormGroup, ControlLabel, Radio, Col, Collapse } from 'react-bootstrap'
 import { Typeahead } from 'react-bootstrap-typeahead'
 
-class AddPerson extends React.Component {
+class EditPerson extends React.Component {
 
   constructor(props) {
     super(props)
-    this.state = {
-      lastName: '',
-      firstNames: '',
-      SSN: '',
-      address: {},
-      email: '',
-      phone: '',
-      language: '',
-      citizenship: '',
-      profession: '',
-      IBAN: '',
-      isOwner: false,
-      ownershipSelf: '',
-      votesSelf: '',
-      ownershipWithFamily: '',
-      votesWithFamily: '',
-      positionInCompany: '',
-      placeOfRegularEmployment: '',
-      cityOfRegularEmployment: '',
-      regularEmploymentAddress: {}
+    if (this.props.initialPerson) {
+      this.state = {
+        lastName: this.props.initialPerson.lastName,
+        firstNames: this.props.initialPerson.firstNames,
+        SSN: this.props.initialPerson.SSN,
+        address: this.props.initialPerson.address,
+        email: this.props.initialPerson.email,
+        phone: this.props.initialPerson.phone,
+        language: this.props.initialPerson.language,
+        citizenship: this.props.initialPerson.citizenship,
+        profession: this.props.initialPerson.profession,
+        IBAN: this.props.initialPerson.IBAN,
+        isOwner: this.props.initialPerson.isOwner,
+        ownershipSelf: this.props.initialPerson.ownershipSelf,
+        votesSelf: this.props.initialPerson.votesSelf,
+        ownershipWithFamily: this.props.initialPerson.ownershipWithFamily,
+        votesWithFamily: this.props.initialPerson.votesWithFamily,
+        positionInCompany: this.props.initialPerson.positionInCompany,
+        placeOfRegularEmployment: this.props.initialPerson.placeOfRegularEmployment,
+        cityOfRegularEmployment: this.props.initialPerson.cityOfRegularEmployment,
+        regularEmploymentAddress: this.props.initialPerson.regularEmploymentAddress
+      }
+    } else {
+      this.state = {
+        lastName: '',
+        firstNames: '',
+        SSN: '',
+        address: {},
+        email: '',
+        phone: '',
+        language: '',
+        citizenship: '',
+        profession: '',
+        IBAN: '',
+        isOwner: false,
+        ownershipSelf: '',
+        votesSelf: '',
+        ownershipWithFamily: '',
+        votesWithFamily: '',
+        positionInCompany: '',
+        placeOfRegularEmployment: '',
+        cityOfRegularEmployment: '',
+        regularEmploymentAddress: {}
+      }
     }
   }
 
@@ -90,17 +114,17 @@ class AddPerson extends React.Component {
     }
     await this.props.addPerson(person)
     if (!this.props.error) {
-      this.props.addUIMessage('Added person ' + person.firstnames + ' ' + person.lastName, 'success', 10)
+      this.props.addUIMessage('Updated person ' + person.firstnames + ' ' + person.lastName, 'success', 10)
       this.props.history.push('/persons')
     } else {
-      this.props.addUIMessage('Could not add the person', 'danger', 10)
+      this.props.addUIMessage('Could not update the person', 'danger', 10)
     }
   }
 
   render() {
     return (
       <div>
-        <TapirHeader title='Add a new Person'>
+        <TapirHeader title='Edit Person details'>
           <StyledLinkButton
             style={{ float: 'right' }}
             to={'/persons'}
@@ -349,8 +373,10 @@ class AddPerson extends React.Component {
   }
 }
 
-const mapStateToProps = store => {
+const mapStateToProps = (store, ownProps) => {
+  const initialPerson = store.persons.items.find(p => p.id.toString === ownProps.match.params.id.toString())
   return {
+    initialPerson,
     error: store.persons.error
   }
 }
@@ -358,7 +384,7 @@ const mapStateToProps = store => {
 export default withRouter(connect(
   mapStateToProps,
   {
-    addPerson,
+    updatePerson,
     addUIMessage
   }
-)(AddPerson))
+)(EditPerson))

@@ -8,6 +8,7 @@ import EditCompany from './components/companies/EditCompany'
 import EmploymentsList from './components/employments/EmploymentsList'
 import PersonsList from './components/persons/PersonsList'
 import AddPerson from './components/persons/AddPerson'
+import EditPerson from './components/persons/EditPerson'
 
 class App extends Component {
   render() {
@@ -19,6 +20,7 @@ class App extends Component {
         <Route exact path='/employments' render={() => <EmploymentsList />} />
         <Route exact path='/persons' render={() => <PersonsList />} />
         <Route exact path='/persons/add' render={() => <AddPerson />} />
+        <Route exact path='/persons/edit/:id' render={() => <EditPerson />} />
       </TapirLayout>
     )
   }

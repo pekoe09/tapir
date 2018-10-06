@@ -16,7 +16,7 @@ const Address = ({ targetAddress, title, street1, street2, zip, city, country, h
   }
 
   return (
-    <StyledSubFormBordered>
+    <StyledSubFormBordered componentClass='fieldset'>
       <ControlLabel style={{ fontStyle: 'italic' }}>{title}</ControlLabel>
       <FormGroup>
         <ControlLabel>Street</ControlLabel>
@@ -36,7 +36,7 @@ const Address = ({ targetAddress, title, street1, street2, zip, city, country, h
           onChange={emitChange}
         />
       </FormGroup>
-      <StyledSubForm componentClass='fieldSet' style={{ marginBottom: 0 }}>
+      <StyledSubForm componentClass='fieldset' style={{ marginBottom: 0 }}>
         <StyledCol sm={4} style={{ paddingRight: 15 }}>
           <FormGroup>
             <ControlLabel>Zip</ControlLabel>
