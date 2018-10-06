@@ -4,7 +4,7 @@ import { withRouter } from 'react-router-dom'
 import { addPerson } from '../../actions/personActions'
 import { addUIMessage } from '../../actions/uiMessageActions'
 import TapirHeader from '../ui-structure/TapirHeader'
-import { StyledLinkButton, StyledButton, StyledForm, StyledSubForm, StyledSubFormBordered, StyledFormControl } from '../ui-structure/StyledComponents'
+import { StyledLinkButton, StyledButton, StyledForm, StyledSubForm, StyledSubFormBordered, StyledFormControl, StyledCol } from '../ui-structure/StyledComponents'
 import Address from '../general/Address'
 import { FormGroup, ControlLabel, Radio, Col, Collapse } from 'react-bootstrap'
 import { Typeahead } from 'react-bootstrap-typeahead'
@@ -102,202 +102,220 @@ class AddPerson extends React.Component {
           />
         </TapirHeader>
         <StyledForm>
-          <Col sm={6}>
-          <FormGroup controlId='personLastName'>
-            <ControlLabel>Last name</ControlLabel>
-            <StyledFormControl
-              name='lastName'
-              type='text'
-              value={this.state.lastName}
-              onChange={this.handleChange}
-            />
-          </FormGroup>
-          <FormGroup controlId='personFirstNames'>
-            <ControlLabel>First names</ControlLabel>
-            <StyledFormControl
-              name='firstNames'
-              type='text'
-              value={this.state.firstNames}
-              onChange={this.handleChange}
-            />
-          </FormGroup>
-          <FormGroup controlId='ssn'>
-            <ControlLabel>SSN</ControlLabel>
-            <StyledFormControl
-              name='SSN'
-              type='text'
-              value={this.state.SSN}
-              onChange={this.handleChange}
-            />
-          </FormGroup>
-          <Address
-            targetAddress={'address'}
-            title={'Home address'}
-            street1={this.state.address.street1}
-            street2={this.state.address.street2}
-            zip={this.state.address.zip}
-            city={this.state.address.city}
-            country={this.state.address.country}
-            handleAddressChange={this.handleAddressChange}
-          />
-          <FormGroup controlId='personEmail'>
-            <ControlLabel>Email</ControlLabel>
-            <StyledFormControl
-              name='email'
-              type='text'
-              value={this.state.email}
-              onChange={this.handleChange}
-            />
-          </FormGroup>
-          <FormGroup controlId='personPhone'>
-            <ControlLabel>Phone</ControlLabel>
-            <StyledFormControl
-              name='phone'
-              type='text'
-              value={this.state.phone}
-              onChange={this.handleChange}
-            />
-          </FormGroup>
-          <FormGroup controlId='personLanguage'>
-            <ControlLabel>Language</ControlLabel>
-            <StyledFormControl
-              name='language'
-              type='text'
-              value={this.state.language}
-              onChange={this.handleChange}
-            />
-          </FormGroup>
-          <FormGroup controlId='personCitizenship'>
-            <ControlLabel>Citizenship</ControlLabel>
-            <StyledFormControl
-              name='citizenship'
-              type='text'
-              value={this.state.citizenship}
-              onChange={this.handleChange}
-            />
-          </FormGroup>
-          <FormGroup controlId='personProfession'>
-            <ControlLabel>Profession</ControlLabel>
-            <StyledFormControl
-              name='profession'
-              type='text'
-              value={this.state.profession}
-              onChange={this.handleChange}
-            />
-          </FormGroup>
-          <FormGroup controlId='personIBAN'>
-            <ControlLabel>IBAN</ControlLabel>
-            <StyledFormControl
-              name='IBAN'
-              type='text'
-              value={this.state.IBAN}
-              onChange={this.handleChange}
-            />
-          </FormGroup>
-          <ControlLabel>Is the person an owner of the company?</ControlLabel>
-          <FormGroup controlId='personIsOwner'>            
-            <Radio
-              name='isOwner'
-              value={false}
-              checked={!this.state.isOwner}
-              onChange={this.handleOwnerToggle}
-              inline
-            >
-              No
-            </Radio>{' '}
-            <Radio
-              name='isOwner'
-              value={true}
-              checked={this.state.isOwner}
-              onChange={this.handleOwnerToggle}
-              inline
-            >
-              Yes
-            </Radio>
-          </FormGroup>
-
-          <Collapse in={this.state.isOwner}>
-            <StyledSubFormBordered>
-              <ControlLabel>Person's ownership share and votes of the company</ControlLabel>
-              <StyledSubForm componentClass='fieldSet'> 
-                <Col sm={4}>
-                  <FormGroup controlId='personOwnershipSelf'>
-                    <ControlLabel>Ownership, %</ControlLabel>
-                    <StyledFormControl
-                      name='ownershipSelf'
-                      type='text'
-                      value={this.state.ownershipSelf}
-                      onChange={this.handleChange}
-                    />
-                  </FormGroup>
-                </Col>
-                <Col sm={4}>
-                <FormGroup controlId='personVotesSelf'>
-                  <ControlLabel>Votes, %</ControlLabel>
+          <Col sm={6} style={{ marginBottom: 20 }}>
+            <StyledSubForm componentClass='fieldSet' style={{ marginBottom: 0 }}>
+              <StyledCol sm={6} style={{ paddingRight: 7 }}>
+                <FormGroup controlId='personLastName'>
+                  <ControlLabel>Last name</ControlLabel>
                   <StyledFormControl
-                    name='votesSelf'
+                    name='lastName'
                     type='text'
-                    value={this.state.votesSelf}
+                    value={this.state.lastName}
                     onChange={this.handleChange}
                   />
-                  </FormGroup>
-                </Col>
-              </StyledSubForm>
+                </FormGroup>
+              </StyledCol>
+              <StyledCol sm={6} style={{ paddingLeft: 7 }}>
+                <FormGroup controlId='personFirstNames'>
+                  <ControlLabel>First names</ControlLabel>
+                  <StyledFormControl
+                    name='firstNames'
+                    type='text'
+                    value={this.state.firstNames}
+                    onChange={this.handleChange}
+                  />
+                </FormGroup>
+              </StyledCol>
+            </StyledSubForm>
+            <StyledSubForm componentClass='fieldSet' style={{ marginBottom: 0 }}>
+              <StyledCol sm={6} style={{ paddingRight: 7 }}>
+                <FormGroup controlId='ssn'>
+                  <ControlLabel>SSN</ControlLabel>
+                  <StyledFormControl
+                    name='SSN'
+                    type='text'
+                    value={this.state.SSN}
+                    onChange={this.handleChange}
+                  />
+                </FormGroup>
+              </StyledCol>
+              <StyledCol sm={6} style={{ paddingLeft: 7 }}>
+                <FormGroup controlId='personIBAN'>
+                  <ControlLabel>IBAN</ControlLabel>
+                  <StyledFormControl
+                    name='IBAN'
+                    type='text'
+                    value={this.state.IBAN}
+                    onChange={this.handleChange}
+                  />
+                </FormGroup>
+              </StyledCol>
+            </StyledSubForm>
+            <StyledSubForm componentClass='fieldSet' style={{ marginBottom: 0 }}>
+              <StyledCol sm={4} style={{ paddingRight: 15 }}>
+                <FormGroup controlId='personLanguage'>
+                  <ControlLabel>Language</ControlLabel>
+                  <StyledFormControl
+                    name='language'
+                    type='text'
+                    value={this.state.language}
+                    onChange={this.handleChange}
+                  />
+                </FormGroup>
+              </StyledCol>
+              <StyledCol sm={8}>
+                <FormGroup controlId='personCitizenship'>
+                  <ControlLabel>Citizenship</ControlLabel>
+                  <StyledFormControl
+                    name='citizenship'
+                    type='text'
+                    value={this.state.citizenship}
+                    onChange={this.handleChange}
+                  />
+                </FormGroup>
+              </StyledCol>
+            </StyledSubForm>
+            <Address
+              targetAddress={'address'}
+              title={'Home address'}
+              street1={this.state.address.street1}
+              street2={this.state.address.street2}
+              zip={this.state.address.zip}
+              city={this.state.address.city}
+              country={this.state.address.country}
+              handleAddressChange={this.handleAddressChange}
+            />
+            <FormGroup controlId='personEmail'>
+              <ControlLabel>Email</ControlLabel>
+              <StyledFormControl
+                name='email'
+                type='text'
+                value={this.state.email}
+                onChange={this.handleChange}
+              />
+            </FormGroup>
+            <FormGroup controlId='personPhone'>
+              <ControlLabel>Phone</ControlLabel>
+              <StyledFormControl
+                name='phone'
+                type='text'
+                value={this.state.phone}
+                onChange={this.handleChange}
+              />
+            </FormGroup>
+            <FormGroup controlId='personProfession'>
+              <ControlLabel>Profession</ControlLabel>
+              <StyledFormControl
+                name='profession'
+                type='text'
+                value={this.state.profession}
+                onChange={this.handleChange}
+              />
+            </FormGroup>
+            <ControlLabel>Is the person an owner of the company?</ControlLabel>
+            <FormGroup controlId='personIsOwner'>
+              <Radio
+                name='isOwner'
+                value={false}
+                checked={!this.state.isOwner}
+                onChange={this.handleOwnerToggle}
+                inline
+              >
+                No
+            </Radio>{' '}
+              <Radio
+                name='isOwner'
+                value={true}
+                checked={this.state.isOwner}
+                onChange={this.handleOwnerToggle}
+                inline
+              >
+                Yes
+            </Radio>
+            </FormGroup>
 
-              <ControlLabel>Person's ownership share and votes together with family members</ControlLabel>
-              <StyledSubForm componentClass='fieldSet'>
-                <Col sm={4}>
-                  <FormGroup controlId='personOwnershipWithFamily'>
-                    <ControlLabel>Ownership, %</ControlLabel>
-                    <StyledFormControl
-                      name='ownershipWithFamily'
-                      type='text'
-                      value={this.state.ownershipWithFamily}
-                      onChange={this.handleChange}
-                    />
-                  </FormGroup>
-                </Col>
-                <Col sm={4}>
-                  <FormGroup controlId='personVotesWithFamily'>
-                    <ControlLabel>Votes, %</ControlLabel>
-                    <StyledFormControl
-                      name='votesWithFamily'
-                      type='text'
-                      value={this.state.votesWithFamily}
-                      onChange={this.handleChange}
-                    />
-                  </FormGroup>
-                </Col>
-              </StyledSubForm>
-            </StyledSubFormBordered>
-          </Collapse>
+            <Collapse in={this.state.isOwner}>
+              <StyledSubFormBordered>
+                <ControlLabel>Person's ownership share and votes of the company</ControlLabel>
+                <StyledSubForm componentClass='fieldSet'>
+                  <Col sm={4}>
+                    <FormGroup controlId='personOwnershipSelf'>
+                      <ControlLabel>Ownership, %</ControlLabel>
+                      <StyledFormControl
+                        name='ownershipSelf'
+                        type='text'
+                        value={this.state.ownershipSelf}
+                        onChange={this.handleChange}
+                      />
+                    </FormGroup>
+                  </Col>
+                  <Col sm={4}>
+                    <FormGroup controlId='personVotesSelf'>
+                      <ControlLabel>Votes, %</ControlLabel>
+                      <StyledFormControl
+                        name='votesSelf'
+                        type='text'
+                        value={this.state.votesSelf}
+                        onChange={this.handleChange}
+                      />
+                    </FormGroup>
+                  </Col>
+                </StyledSubForm>
 
-          <FormGroup controlId='personPositionInCompany'>
-            <ControlLabel>Position in company</ControlLabel>
-            <StyledFormControl
-              name='positionInCompany'
-              type='text'
-              value={this.state.positionInCompany}
-              onChange={this.handleChange}
-            />
-          </FormGroup>
-          <FormGroup controlId='personPlaceOfRegularEmployment'>
-            <ControlLabel>Place of regular employment</ControlLabel>
-            <StyledFormControl
-              name='placeOfRegularEmployment'
-              type='text'
-              value={this.state.placeOfRegularEmployment}
-              onChange={this.handleChange}
-            />
-          </FormGroup>
-          <FormGroup controlId='personCityOfRegularEmployment'>
-            <ControlLabel>City of regular employment</ControlLabel>
-            <StyledFormControl
-              name='cityOfRegularEmployment'
-              type='text'
-              value={this.state.cityOfRegularEmployment}
-              onChange={this.handleChange}
-            />
+                <ControlLabel>Person's ownership share and votes together with family members</ControlLabel>
+                <StyledSubForm componentClass='fieldSet'>
+                  <Col sm={4}>
+                    <FormGroup controlId='personOwnershipWithFamily'>
+                      <ControlLabel>Ownership, %</ControlLabel>
+                      <StyledFormControl
+                        name='ownershipWithFamily'
+                        type='text'
+                        value={this.state.ownershipWithFamily}
+                        onChange={this.handleChange}
+                      />
+                    </FormGroup>
+                  </Col>
+                  <Col sm={4}>
+                    <FormGroup controlId='personVotesWithFamily'>
+                      <ControlLabel>Votes, %</ControlLabel>
+                      <StyledFormControl
+                        name='votesWithFamily'
+                        type='text'
+                        value={this.state.votesWithFamily}
+                        onChange={this.handleChange}
+                      />
+                    </FormGroup>
+                  </Col>
+                </StyledSubForm>
+              </StyledSubFormBordered>
+            </Collapse>
+
+            <FormGroup controlId='personPositionInCompany'>
+              <ControlLabel>Position in company</ControlLabel>
+              <StyledFormControl
+                name='positionInCompany'
+                type='text'
+                value={this.state.positionInCompany}
+                onChange={this.handleChange}
+              />
+            </FormGroup>
+            <FormGroup controlId='personPlaceOfRegularEmployment'>
+              <ControlLabel>Place of regular employment</ControlLabel>
+              <StyledFormControl
+                name='placeOfRegularEmployment'
+                type='text'
+                value={this.state.placeOfRegularEmployment}
+                onChange={this.handleChange}
+              />
+            </FormGroup>
+            <FormGroup controlId='personCityOfRegularEmployment'>
+              <ControlLabel>City of regular employment</ControlLabel>
+              <StyledFormControl
+                name='cityOfRegularEmployment'
+                type='text'
+                value={this.state.cityOfRegularEmployment}
+                onChange={this.handleChange}
+              />
             </FormGroup>
             <Address
               targetAddress={'regularEmploymentAddress'}
@@ -309,15 +327,15 @@ class AddPerson extends React.Component {
               country={this.state.regularEmploymentAddress.country}
               handleAddressChange={this.handleAddressChange}
             />
-          <FormGroup>
-            <StyledButton
-              type='primary'
-              onClick={this.handleSubmit}
-            >
-              Save
+            <FormGroup>
+              <StyledButton
+                type='primary'
+                onClick={this.handleSubmit}
+              >
+                Save
             </StyledButton>
             </FormGroup>
-            </Col>
+          </Col>
         </StyledForm>
       </div>
     )

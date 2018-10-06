@@ -1,6 +1,6 @@
 import React from 'react'
-import { ControlLabel, FormGroup } from 'react-bootstrap'
-import { StyledSubFormBordered, StyledFormControl } from '../ui-structure/StyledComponents'
+import { ControlLabel, FormGroup, Col } from 'react-bootstrap'
+import { StyledSubFormBordered, StyledFormControl, StyledSubForm, StyledCol } from '../ui-structure/StyledComponents'
 
 const Address = ({ targetAddress, title, street1, street2, zip, city, country, handleAddressChange }) => {
 
@@ -36,25 +36,31 @@ const Address = ({ targetAddress, title, street1, street2, zip, city, country, h
           onChange={emitChange}
         />
       </FormGroup>
-      <FormGroup>
-        <ControlLabel>Zip</ControlLabel>
-        <StyledFormControl
-          name='zip'
-          type='text'
-          value={zip}
-          onChange={emitChange}
-        />
-      </FormGroup>
-      <FormGroup>
-        <ControlLabel>City</ControlLabel>
-        <StyledFormControl
-          name='city'
-          type='text'
-          value={city}
-          onChange={emitChange}
-        />
-      </FormGroup>
-      <FormGroup>
+      <StyledSubForm componentClass='fieldSet' style={{ marginBottom: 0 }}>
+        <StyledCol sm={4} style={{ paddingRight: 15 }}>
+          <FormGroup>
+            <ControlLabel>Zip</ControlLabel>
+            <StyledFormControl
+              name='zip'
+              type='text'
+              value={zip}
+              onChange={emitChange}
+            />
+          </FormGroup>
+        </StyledCol>
+        <StyledCol sm={8}>
+          <FormGroup>
+            <ControlLabel>City</ControlLabel>
+            <StyledFormControl
+              name='city'
+              type='text'
+              value={city}
+              onChange={emitChange}
+            />
+          </FormGroup>
+        </StyledCol>
+      </StyledSubForm>
+      <FormGroup style={{ marginBottom: 0 }}>
         <ControlLabel>Country</ControlLabel>
         <StyledFormControl
           name='country'
