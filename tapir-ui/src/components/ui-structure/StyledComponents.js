@@ -17,6 +17,19 @@ const StyledForm = styled(Form)`
   font-size: 0.8em;
 `
 
+const StyledSubForm = styled(Form)`
+  margin: 0px;
+  font-size: 1em;
+`
+
+const StyledSubFormBordered = styled(StyledSubForm)`
+  border-style: solid;
+  border-width: 0.5px;
+  border-color: lightgrey;
+  border-radius: 4px;
+  padding: 5px;
+`
+
 const StyledFormControl = styled(FormControl)`
   font-size: 1.2em;
   height: fit-content;
@@ -101,6 +114,8 @@ export {
   StyledReactTable,
   StyledButton,
   StyledForm,
+  StyledSubForm,
+  StyledSubFormBordered,
   StyledFormControl,
   StyledLink,
   StyledLinkButton,

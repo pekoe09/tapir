@@ -60,6 +60,27 @@ class PersonsList extends React.Component {
 
   columns = [
     {
+      Header: 'Last name',
+      accessor: 'lastName',
+      headerStyle: {
+        textAlign: 'left'
+      }
+    },
+    {
+      Header: 'First names',
+      accessor: 'firstNames',
+      headerStyle: {
+        textAlign: 'left'
+      }
+    },
+    {
+      Header: 'Email',
+      accessor: 'email',
+      headerStyle: {
+        textAlign: 'left'
+      }
+    },
+    {
       Header: '',
       accessor: 'delete',
       Cell: (row) => (
