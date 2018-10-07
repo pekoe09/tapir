@@ -29,7 +29,7 @@ namespace Tapir.Models
             };
         }
 
-        internal Address Hydrate(AddressDTO dto)
+        static internal Address Hydrate(AddressDTO dto)
         {
             return new Address()
             {

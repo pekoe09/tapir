@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import { getAllCompanies, deleteCompany } from '../../actions/companyActions'
 import { addUIMessage } from '../../actions/uiMessageActions'
 import TapirHeader from '../ui-structure/TapirHeader'
-import { StyledReactTable, StyledLinkButton, StyledButton, StyleModal, StyledModal } from '../ui-structure/StyledComponents'
+import { StyledReactTable, StyledLinkButton, StyledButton } from '../ui-structure/StyledComponents'
 import { Modal } from 'react-bootstrap'
 
 class CompaniesList extends React.Component {
@@ -37,17 +37,17 @@ class CompaniesList extends React.Component {
     })
   }
 
-  handleConfirmedDelete= async () => {
-    const fullName = this.state.rowToDelete.fullName
+  handleConfirmedDelete = async () => {
+    const rowToDelete = this.state.rowToDelete
     this.setState({
       deleteConfirmVisible: false,
       rowToDelete: null
     })
-    this.props.deleteCompany(this.state.rowToDelete.id)
+    this.props.deleteCompany(rowToDelete.id)
     if (!this.props.error) {
-      this.props.addUIMessage('Deleted ' + this.state.rowToDelete.fullName, 'success', 10)
+      this.props.addUIMessage('Deleted ' + rowToDelete.fullName, 'success', 10)
     } else {
-      this.props.addUIMessage('Could not delete ' + this.state.rowToDelete.fullName, 'danger', 10)
+      this.props.addUIMessage('Could not delete ' + rowToDelete.fullName, 'danger', 10)
     }
   }
 
@@ -103,9 +103,7 @@ class CompaniesList extends React.Component {
   render() {
     return (
       <div>
-        <TapirHeader
-          title='Companies'
-        >
+        <TapirHeader title='Companies'>
           <StyledLinkButton
             style={{ float: 'right' }}
             to={'/companies/add'}

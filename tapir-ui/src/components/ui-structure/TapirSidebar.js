@@ -3,8 +3,8 @@ import styled from 'styled-components'
 import TapirSidebarNav from './TapirSidebarNav'
 
 const StyledSidebar = styled.div`
-  height: 100%;
-  position: 'fixed';
+  height: 100vh;
+  position: sticky;
   z-index: 1;
   top: 0;
   left: 0;

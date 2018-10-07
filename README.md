@@ -1,4 +1,7 @@
 # tapir
+
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/c7eaa475b8a642bfbd3e994a713bea5c)](https://app.codacy.com/app/juha-kangas/tapir?utm_source=github.com&utm_medium=referral&utm_content=pekoe09/tapir&utm_campaign=Badge_Grade_Dashboard)
+
 System for logging and reporting occupational accidents
 
 Tapir enables an organization to store data on occupational accidents and report them directly to its insurance company.
