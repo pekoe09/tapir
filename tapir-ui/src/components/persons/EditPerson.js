@@ -25,14 +25,22 @@ class EditPerson extends React.Component {
       this.state = {
         lastName: this.props.initialPerson.lastName,
         firstNames: this.props.initialPerson.firstNames,
-        SSN: this.props.initialPerson.SSN,
-        address: this.props.initialPerson.address,
+        SSN: this.props.initialPerson.ssn,
+        address: this.props.initialPerson.address ?
+          this.props.initialPerson.address :
+          {
+            street1: '',
+            street2: '',
+            zip: '',
+            city: '',
+            country: ''
+          },
         email: this.props.initialPerson.email,
         phone: this.props.initialPerson.phone,
         language: this.props.initialPerson.language,
         citizenship: this.props.initialPerson.citizenship,
         profession: this.props.initialPerson.profession,
-        IBAN: this.props.initialPerson.IBAN,
+        IBAN: this.props.initialPerson.iban,
         isOwner: this.props.initialPerson.isOwner,
         ownershipSelf: this.props.initialPerson.ownershipSelf,
         votesSelf: this.props.initialPerson.votesSelf,
@@ -41,14 +49,28 @@ class EditPerson extends React.Component {
         positionInCompany: this.props.initialPerson.positionInCompany,
         placeOfRegularEmployment: this.props.initialPerson.placeOfRegularEmployment,
         cityOfRegularEmployment: this.props.initialPerson.cityOfRegularEmployment,
-        regularEmploymentAddress: this.props.initialPerson.regularEmploymentAddress
+        regularEmploymentAddress: this.props.initialPerson.regularEmploymentAddress ?
+          this.props.initialPerson.regularEmploymentAddress :
+          {
+            street1: '',
+            street2: '',
+            zip: '',
+            city: '',
+            country: ''
+          }
       }
     } else {
       this.state = {
         lastName: '',
         firstNames: '',
         SSN: '',
-        address: {},
+        address: {
+          street1: '',
+          street2: '',
+          zip: '',
+          city: '',
+          country: ''
+        },
         email: '',
         phone: '',
         language: '',
@@ -63,7 +85,13 @@ class EditPerson extends React.Component {
         positionInCompany: '',
         placeOfRegularEmployment: '',
         cityOfRegularEmployment: '',
-        regularEmploymentAddress: {}
+        regularEmploymentAddress: {
+          street1: '',
+          street2: '',
+          zip: '',
+          city: '',
+          country: ''
+        }
       }
     }
   }
@@ -92,16 +120,17 @@ class EditPerson extends React.Component {
   handleSubmit = async (event) => {
     event.preventDefault()
     const person = {
+      id: this.props.initialPerson.id,
       lastName: this.state.lastName,
       firstNames: this.state.firstNames,
-      SSN: this.state.SSN,
+      ssn: this.state.SSN,
       address: this.state.address,
       email: this.state.email,
       phone: this.state.phone,
       language: this.state.language,
       citizenship: this.state.citizenship,
       profession: this.state.profession,
-      IBAN: this.state.IBAN,
+      iban: this.state.IBAN,
       isOwner: this.state.isOwner,
       ownershipSelf: this.state.ownershipSelf,
       votesSelf: this.state.votesSelf,
@@ -112,7 +141,7 @@ class EditPerson extends React.Component {
       cityOfRegularEmployment: this.state.cityOfRegularEmployment,
       regularEmploymentAddress: this.state.regularEmploymentAddress
     }
-    await this.props.addPerson(person)
+    await this.props.updatePerson(person)
     if (!this.props.error) {
       this.props.addUIMessage('Updated person ' + person.firstnames + ' ' + person.lastName, 'success', 10)
       this.props.history.push('/persons')
@@ -374,7 +403,9 @@ class EditPerson extends React.Component {
 }
 
 const mapStateToProps = (store, ownProps) => {
-  const initialPerson = store.persons.items.find(p => p.id.toString === ownProps.match.params.id.toString())
+  console.log(ownProps.match.params.id)
+  const initialPerson = store.persons.items.find(p => p.id.toString() === ownProps.match.params.id.toString())
+  console.log(initialPerson)
   return {
     initialPerson,
     error: store.persons.error

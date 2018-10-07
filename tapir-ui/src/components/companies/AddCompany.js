@@ -162,7 +162,7 @@ class AddCompany extends React.Component {
                 onClick={this.handleSubmit}
               >
                 Save
-            </StyledButton>
+              </StyledButton>
             </FormGroup>
           </Col>
         </StyledForm>
