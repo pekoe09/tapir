@@ -1,7 +1,7 @@
 ﻿import React from 'react'
 import styled, { css } from 'styled-components'
 import ReactTable from 'react-table'
-import { Button, Modal, Form, FormControl } from 'react-bootstrap'
+import { Button, Modal, Form, FormControl, Col } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 
 const StyledReactTable = styled(ReactTable)`
@@ -11,10 +11,27 @@ const StyledReactTable = styled(ReactTable)`
 const StyledModal = styled(Modal)`
   
 `
+const StyledCol = styled(Col)`
+  padding: 0;
+`
 
 const StyledForm = styled(Form)`
   margin: 15px;
   font-size: 0.8em;
+`
+
+const StyledSubForm = styled(Form)`
+  margin: 0px;
+  margin-bottom: 15px;
+  font-size: 1em;
+`
+
+const StyledSubFormBordered = styled(StyledSubForm)`
+  border-style: solid;
+  border-width: 0.5px;
+  border-color: lightgrey;
+  border-radius: 4px;
+  padding: 10px;
 `
 
 const StyledFormControl = styled(FormControl)`
@@ -100,7 +117,10 @@ const StyledLinkButton = ({ text, to, btntype }) => {
 export {
   StyledReactTable,
   StyledButton,
+  StyledCol,
   StyledForm,
+  StyledSubForm,
+  StyledSubFormBordered,
   StyledFormControl,
   StyledLink,
   StyledLinkButton,

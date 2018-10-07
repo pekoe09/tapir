@@ -39,6 +39,12 @@ namespace Tapir.Models
             }
             updatedCompany.FullName = company.FullName;
             updatedCompany.ShortName = company.ShortName;
+            updatedCompany.BusinessId = company.BusinessId;
+            updatedCompany.Addresses = company.Addresses;
+            updatedCompany.Sector = company.Sector;
+            updatedCompany.InsuranceNumber = company.InsuranceNumber;
+            updatedCompany.BankAccount = company.BankAccount;
+
             context.Companies.Update(updatedCompany);
             context.SaveChanges();
             return updatedCompany;

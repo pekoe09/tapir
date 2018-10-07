@@ -1,7 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace Tapir.Models
 {
@@ -16,12 +15,18 @@ namespace Tapir.Models
 
         public IEnumerable<Person> GetAll()
         {
-            return context.Persons.AsEnumerable();
+            return context.Persons
+                .Include(p => p.Address)
+                .Include(p => p.RegularEmploymentAddress)
+                .AsEnumerable();
         }
 
         public Person GetById(int id)
         {
-            return context.Persons.Single(p => p.ID == id);
+            return context.Persons
+                .Include(p => p.Address)
+                .Include(p => p.RegularEmploymentAddress)
+                .Single(p => p.ID == id);
         }
 
         public Person Insert(Person person)
@@ -40,7 +45,24 @@ namespace Tapir.Models
             }
             updatedPerson.LastName = person.LastName;
             updatedPerson.FirstNames = person.FirstNames;
-            updatedPerson.DOB = person.DOB;
+            updatedPerson.SSN = person.SSN;
+            updatedPerson.Address = person.Address;
+            updatedPerson.Email = person.Email;
+            updatedPerson.Phone = person.Phone;
+            updatedPerson.Language = person.Language;
+            updatedPerson.Citizenship = person.Citizenship;
+            updatedPerson.Profession = person.Profession;
+            updatedPerson.IBAN = person.IBAN;
+            updatedPerson.IsOwner = person.IsOwner;
+            updatedPerson.OwnershipSelf = person.OwnershipSelf;
+            updatedPerson.VotesSelf = person.VotesSelf;
+            updatedPerson.OwnershipWithFamily = person.OwnershipWithFamily;
+            updatedPerson.VotesWithFamily = person.VotesWithFamily;
+            updatedPerson.PositionInCompany = person.PositionInCompany;
+            updatedPerson.PlaceOfRegularEmployment = person.PlaceOfRegularEmployment;
+            updatedPerson.CityOfRegularEmployment = person.CityOfRegularEmployment;
+            updatedPerson.RegularEmploymentAddress = person.RegularEmploymentAddress;
+
             context.Persons.Update(updatedPerson);
             context.SaveChanges();
             return updatedPerson;
