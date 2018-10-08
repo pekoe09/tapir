@@ -37,6 +37,8 @@ namespace Tapir
             services.AddScoped<IBusinessSectorService, BusinessSectorService>();
             services.AddScoped<ICompaniesRepository, CompaniesRepository>();
             services.AddScoped<ICompanyService, CompanyService>();
+            services.AddScoped<IEmploymentRepository, EmploymentRepository>();
+            services.AddScoped<IEmploymentService, EmploymentService>();
             services.AddScoped<IPersonsRepository, PersonsRepository>();
             services.AddScoped<IPersonService, PersonService>();
         }
