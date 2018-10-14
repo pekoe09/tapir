@@ -387,7 +387,7 @@ class EditPerson extends React.Component {
               country={this.state.regularEmploymentAddress.country}
               handleAddressChange={this.handleAddressChange}
             />
-            <FormGroup>
+            <FormGroup style={{ marginTop: 15 }}>
               <StyledButton
                 type='primary'
                 onClick={this.handleSubmit}

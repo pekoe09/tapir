@@ -31,9 +31,9 @@ const addPersonBegin = () => ({
   type: PERSON_CREATE_BEGIN
 })
 
-const addPersonSuccess = company => ({
+const addPersonSuccess = person => ({
   type: PERSON_CREATE_SUCCESS,
-  payload: { company }
+  payload: { person }
 })
 
 const addPersonFailure = error => ({
@@ -45,9 +45,9 @@ const updatePersonBegin = () => ({
   type: PERSON_UPDATE_BEGIN
 })
 
-const updatePersonSuccess = company => ({
+const updatePersonSuccess = person => ({
   type: PERSON_UPDATE_SUCCESS,
-  payload: { company }
+  payload: { person }
 })
 
 const updatePersonFailure = error => ({
@@ -59,9 +59,9 @@ const deletePersonBegin = () => ({
   type: PERSON_DELETE_BEGIN
 })
 
-const deletePersonSuccess = company => ({
+const deletePersonSuccess = person => ({
   type: PERSON_DELETE_SUCCESS,
-  payload: { company }
+  payload: { person }
 })
 
 const deletePersonFailure = error => ({

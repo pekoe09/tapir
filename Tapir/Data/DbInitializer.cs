@@ -143,21 +143,17 @@ namespace Tapir.Models
             var employments = new Employment[]
             {
                 new Employment{
-                    PersonID = (int)persons.Single(p => p.LastName == "Avanne").ID,
-                    CompanyID = (int)companies.Single(c => c.ShortName == "Oy1").ID
-                },
-                new Employment{
-                    PersonID = (int)persons.Single(p => p.LastName == "Bergström").ID,
-                    CompanyID = (int)companies.Single(c => c.ShortName == "Oy1").ID
-                },
-                new Employment{
-                    PersonID = (int)persons.Single(p => p.LastName == "Bergström").ID,
-                    CompanyID = (int)companies.Single(c => c.ShortName == "Oy2").ID
-                },
-                new Employment{
-                    PersonID = (int)persons.Single(p => p.LastName == "Cronqvist").ID,
-                    CompanyID = (int)companies.Single(c => c.ShortName == "Oy2").ID
-                },
+                    Company = companies[0],
+                    Person = persons[0],
+                    StartDate = new DateTime(2000, 12, 1),
+                    IsMainOccupation = true,
+                    IsFullTime = true,
+                    IsCalledToWork = false,
+                    WeeklyHours = 37.5,
+                    IsStudent = false,
+                    IsPensioner = false,
+                    HasOtherEmployments = false
+                }
             };
             foreach (Employment e in employments)
             {

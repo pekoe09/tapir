@@ -5,6 +5,7 @@ import storage from 'redux-persist/lib/storage'
 import autoMergeLevel2 from 'redux-persist/lib/stateReconciler/autoMergeLevel2'
 
 import companyReducer from './reducers/companyReducer'
+import employmentReducer from './reducers/employmentReducer'
 import personReducer from './reducers/personReducer'
 import sectorReducer from './reducers/sectorReducer'
 import uiMessageReducer from './reducers/uiMessageReducer'
@@ -12,6 +13,7 @@ import uiMessageReducer from './reducers/uiMessageReducer'
 const appReducer = combineReducers({
   companies: companyReducer,
   businessSectors: sectorReducer,
+  employments: employmentReducer,
   persons: personReducer,
   uiMessages: uiMessageReducer
 })

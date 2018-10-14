@@ -22,7 +22,7 @@ const StyledForm = styled(Form)`
 
 const StyledSubForm = styled(Form)`
   margin: 0px;
-  margin-bottom: 15px;
+  margin-bottom: 0px;
   font-size: 1em;
 `
 

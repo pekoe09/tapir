@@ -110,7 +110,7 @@ class AddPerson extends React.Component {
         </TapirHeader>
         <StyledForm>
           <Col sm={6} style={{ marginBottom: 20 }}>
-            <StyledSubForm componentClass='fieldset' style={{ marginBottom: 0 }}>
+            <StyledSubForm componentClass='fieldset'>
               <StyledCol sm={6} style={{ paddingRight: 7 }}>
                 <FormGroup controlId='personLastName'>
                   <ControlLabel>Last name</ControlLabel>
@@ -134,7 +134,7 @@ class AddPerson extends React.Component {
                 </FormGroup>
               </StyledCol>
             </StyledSubForm>
-            <StyledSubForm componentClass='fieldset' style={{ marginBottom: 0 }}>
+            <StyledSubForm componentClass='fieldset'>
               <StyledCol sm={6} style={{ paddingRight: 7 }}>
                 <FormGroup controlId='ssn'>
                   <ControlLabel>SSN</ControlLabel>
@@ -158,7 +158,7 @@ class AddPerson extends React.Component {
                 </FormGroup>
               </StyledCol>
             </StyledSubForm>
-            <StyledSubForm componentClass='fieldset' style={{ marginBottom: 0 }}>
+            <StyledSubForm componentClass='fieldset'>
               <StyledCol sm={4} style={{ paddingRight: 15 }}>
                 <FormGroup controlId='personLanguage'>
                   <ControlLabel>Language</ControlLabel>
@@ -334,7 +334,7 @@ class AddPerson extends React.Component {
               country={this.state.regularEmploymentAddress.country}
               handleAddressChange={this.handleAddressChange}
             />
-            <FormGroup>
+            <FormGroup style={{ marginTop: 15 }}>
               <StyledButton
                 type='primary'
                 onClick={this.handleSubmit}

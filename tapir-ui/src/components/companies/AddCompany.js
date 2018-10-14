@@ -95,7 +95,7 @@ class AddCompany extends React.Component {
                 onChange={this.handleChange}
               />
             </FormGroup>
-            <StyledSubForm componentClass='fieldset' style={{ marginBottom: 0 }}>
+            <StyledSubForm componentClass='fieldset'>
               <StyledCol sm={6} style={{ paddingRight: 7 }}>
                 <FormGroup controlId='companyBusinessId'>
                   <ControlLabel>Business Id</ControlLabel>
@@ -132,7 +132,7 @@ class AddCompany extends React.Component {
               country={this.state.address.country}
               handleAddressChange={this.handleAddressChange}
             />
-            <StyledSubForm componentClass='fieldset' style={{ marginBottom: 0 }}>
+            <StyledSubForm componentClass='fieldset' style={{ marginTop: 15 }}>
               <StyledCol sm={6} style={{ paddingRight: 7 }}>
                 <FormGroup controlId='companyInsuranceNumber'>
                   <ControlLabel>Insurance number</ControlLabel>
