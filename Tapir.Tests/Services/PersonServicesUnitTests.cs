@@ -269,7 +269,6 @@ namespace Tapir.UnitTests.Services
             PersonDTO dto = new PersonDTO()
             {
                 LastName = "last",
-                FirstNames = "firsts",
                 Address = new AddressDTO()
                 {
                     Street1 = "Street14",

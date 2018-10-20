@@ -1,6 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Tapir.Core;
 using Tapir.Models;
+using System.ComponentModel.DataAnnotations;
 
 namespace Tapir.Services
 {
@@ -17,7 +19,7 @@ namespace Tapir.Services
         {
             IEnumerable<Person> persons = personsRepository.GetAll();
             List<PersonDTO> personDTOs = new List<PersonDTO>();
-            foreach(Person p in persons)
+            foreach (Person p in persons)
             {
                 personDTOs.Add(p.getDTO());
             }
@@ -27,7 +29,7 @@ namespace Tapir.Services
         public PersonDTO GetPerson(int id)
         {
             Person person = personsRepository.GetById(id);
-            if(person != null)
+            if (person != null)
             {
                 return person.getDTO();
             }
@@ -39,12 +41,16 @@ namespace Tapir.Services
 
         public PersonDTO SavePerson(PersonDTO person)
         {
-            if(person == null)
+            if (person == null)
             {
                 return null;
             }
+            if (!Validator.TryValidateObject(person, new ValidationContext(person), new List<ValidationResult>()))
+            {
+                throw new ArgumentException("PersonDTO instance fails validation");
+            }
             Person savedPerson = null;
-            if(person.ID.HasValue)
+            if (person.ID.HasValue)
             {
                 savedPerson = personsRepository.Update(Person.Hydrate(person));
             }
@@ -52,7 +58,7 @@ namespace Tapir.Services
             {
                 savedPerson = personsRepository.Insert(Person.Hydrate(person));
             }
-            if(savedPerson != null)
+            if (savedPerson != null)
             {
                 return savedPerson.getDTO();
             }
@@ -65,7 +71,7 @@ namespace Tapir.Services
         public PersonDTO RemovePerson(int id)
         {
             PersonDTO deletedPerson = GetPerson(id);
-            if(deletedPerson != null)
+            if (deletedPerson != null)
             {
                 personsRepository.Remove(id);
             }
