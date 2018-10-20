@@ -22,7 +22,7 @@ namespace Tapir
                 try
                 {
                     var context = services.GetRequiredService<TapirContext>();
-                    context.Database.EnsureCreated();
+                    //context.Database.EnsureCreated();
                     Console.WriteLine(context.Database.ProviderName);
                     DbInitializer.Initialize(context);
                 }

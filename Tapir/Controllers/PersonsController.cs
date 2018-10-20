@@ -44,7 +44,7 @@ namespace Tapir.Controllers
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
-            }
+            }            
             PersonDTO newPerson = personService.SavePerson(person);
             return CreatedAtRoute(routeName: "GetPerson", routeValues: new { id = newPerson.ID }, value: newPerson);
         }
