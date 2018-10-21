@@ -1,8 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace Tapir.Models
 {
-    public class TapirContext : DbContext
+    public class TapirContext : IdentityDbContext<TapirUser>
     {
         public TapirContext(DbContextOptions<TapirContext> options)
             : base(options)
