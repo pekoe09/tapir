@@ -261,4 +261,4 @@ __pycache__/
 *.pyc
 
 # config files
-appsettings.json
+**/appsettings.json

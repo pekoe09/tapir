@@ -1,8 +1,9 @@
 ﻿import React from 'react'
 import { connect } from 'react-redux'
-import { Navbar } from 'react-bootstrap'
+import { Navbar, FormGroup, FormControl , Button, ControlLabel} from 'react-bootstrap'
 import { getAllSectors } from '../../actions/sectorActions'
 import { getAllCompanies } from '../../actions/companyActions'
+import Login from './Login'
 
 class TapirNavbar extends React.Component {
 
@@ -17,8 +18,11 @@ class TapirNavbar extends React.Component {
         <Navbar.Header>
           <Navbar.Brand>
             Tapiiri
-        </Navbar.Brand>
+          </Navbar.Brand>
         </Navbar.Header>
+        <Navbar.Form pullright>
+          <Login />
+        </Navbar.Form>
       </Navbar>
     )
   }
